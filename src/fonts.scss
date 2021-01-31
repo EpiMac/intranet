@@ -1,0 +1,27 @@
+/*
+ * San Francisco fonts
+ */
+
+@mixin font($family, $type, $weight: 'Regular', $weightVal: 400, $italic: false) {
+  @font-face {
+    font-family: 'SF #{$family} #{$type}';
+    font-weight: $weightVal;
+    @if($italic) {
+      font-style: italic;
+    }
+
+    src: url('./assets/fonts/SF-#{$family}-#{$type}-#{$weight}#{if($italic, 'Italic', '')}.otf') format('opentype');
+  }
+}
+
+
+@include font('Compact', 'Display', 'Light', 300);
+@include font('Compact', 'Display');
+@include font('Compact', 'Text', 'Light', 300);
+
+@include font('Pro', 'Display', 'Bold', 700);
+@include font('Pro', 'Display', 'Semibold', 600);
+@include font('Pro', 'Text', 'Bold', 700);
+@include font('Pro', 'Text', 'Light', 300, true);
+@include font('Pro', 'Text');
+@include font('Pro', 'Text', 'Semibold', 600);

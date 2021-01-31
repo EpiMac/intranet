@@ -22,7 +22,8 @@ module.exports = {
 	},
 	output: {
 		path: path.join(__dirname, '/dist'),
-		filename: '[name].[contenthash].js',
+		publicPath: '/',
+		filename: 'app/[contenthash].js',
 		chunkFilename: '[name].[id].js'
 	},
 	module: {
@@ -41,13 +42,27 @@ module.exports = {
 				}
 			},
 			{
-				test: /\.(c|sa|sc)ss$/i,
+				test: /\.(c|sa|sc)ss$/,
 				use: [
 					MiniCssExtractPlugin.loader,
 					'css-loader',
 					'postcss-loader',
 					'sass-loader'
 				],
+			},
+			{
+				test: /\.(svg|png)$/,
+				type: 'asset/resource',
+				generator: {
+					filename: 'assets/img/[contenthash][ext]'
+				}
+			},
+			{
+				test: /\.otf$/,
+				type: 'asset/resource',
+				generator: {
+					filename: 'assets/fonts/[contenthash][ext]'
+				}
 			},
 			{
 				// required to prevent errors from Svelte on Webpack 5+
@@ -69,7 +84,7 @@ module.exports = {
 			publicPath: '/'
 		}),
 		new MiniCssExtractPlugin({
-			filename: '[name].[contenthash].css'
+			filename: 'app/[contenthash].css'
 		})
 	],
 	optimization: {

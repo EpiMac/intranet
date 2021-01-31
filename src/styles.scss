@@ -1,0 +1,54 @@
+@layer utilities {
+  .text-shadow {
+    text-shadow: 0 1px 1px rgba(0, 0, 0, .1), 0 1px 4px rgba(0, 0, 0, .2);
+  }
+
+  .text-md {
+    font-size: 15px;
+  }
+
+
+  .p-route {
+    @apply px-3;
+  }
+
+  .w-195px {
+    width: 195px;
+  }
+
+  .w-225px {
+    width: 225px;
+  }
+
+  .w-400px {
+    width: 400px;
+  }
+
+  .w-700px {
+    width: 700px;
+  }
+
+
+  .shadow-separator {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, .7);
+  }
+
+  .shadow-button {
+    box-shadow: 0 11px 17px rgba(0, 0, 0, .4);
+  }
+
+
+  .bg-img-base {
+    background-image: url("./assets/images/base-background.png");
+  }
+
+
+  .bg-blur-50 {
+    backdrop-filter: blur(50px);
+  }
+
+
+  .first-capitalize:first-letter {
+    text-transform: capitalize;
+  }
+}
