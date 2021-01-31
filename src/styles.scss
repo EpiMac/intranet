@@ -39,12 +39,19 @@
 
 
   .bg-img-base {
-    background-image: url("./assets/images/base-background.png");
+    background-image: url('./assets/images/base-background.png');
   }
 
+  .bg-img-light {
+    background-image: url('./assets/images/light-background.jpg');
+  }
 
-  .bg-blur-50 {
-    backdrop-filter: blur(50px);
+  .bg-blur {
+    backdrop-filter: blur(50px) saturate(125%);
+  }
+
+  .bg-trans-red {
+    background-color: rgba(181, 4, 4, .75);
   }
 
 

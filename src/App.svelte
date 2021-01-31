@@ -5,9 +5,15 @@
 
     import Login from './views/Login.svelte';
     import Profile from './views/Profile.svelte';
+
+    import { user, setup } from './data/auth';
+    setup();
+
+    // TODO: Dark theme
+    $: bg = $user ? 'light' : 'base';
 </script>
 
-<main class="w-screen h-screen  flex flex-col  bg-img-base bg-cover">
+<main class="w-screen h-screen  flex flex-col  bg-img-{bg} bg-cover">
     <Router>
         <TopBar />
         <div class="flex flex-grow">

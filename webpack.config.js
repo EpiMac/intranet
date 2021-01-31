@@ -51,7 +51,7 @@ module.exports = {
 				],
 			},
 			{
-				test: /\.(svg|png)$/,
+				test: /\.(svg|png|jpg)$/,
 				type: 'asset/resource',
 				generator: {
 					filename: 'assets/img/[contenthash][ext]'
@@ -95,6 +95,7 @@ module.exports = {
 	},
 	devtool: prod ? false : 'source-map',
 	devServer: {
-		hot: true
+		hot: true,
+		historyApiFallback: true
 	}
 };

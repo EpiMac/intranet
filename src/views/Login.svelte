@@ -2,7 +2,7 @@
     import { navigate } from 'svelte-routing';
     import { login } from '../data/auth';
 
-    let logo = require('../assets/images/logo.png');
+    const logo = require('../assets/images/logo.png');
 
     function handleLogin()
     {

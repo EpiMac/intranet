@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Microsoft_logo</title>
+    <g id="Desktop" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Profil-(light)" transform="translate(-590.000000, -811.000000)" fill-rule="nonzero">
+            <g id="Contenu" transform="translate(450.000000, 0.000000)">
+                <g id="Avantages-IONIS" transform="translate(61.936428, 570.000000)">
+                    <g id="Se-connecter-via-Microsoft" transform="translate(28.063572, 223.000000)">
+                        <g id="Microsoft_logo" transform="translate(50.000000, 18.000000)">
+                            <polygon id="Path" fill="#F35325" points="0 0 9 0 9 9 0 9"></polygon>
+                            <polygon id="Path" fill="#81BC06" points="11 0 20 0 20 9 11 9"></polygon>
+                            <polygon id="Path" fill="#05A6F0" points="0 11 9 11 9 20 0 20"></polygon>
+                            <polygon id="Path" fill="#FFBA08" points="11 11 20 11 20 20 11 20"></polygon>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

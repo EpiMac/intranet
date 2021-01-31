@@ -16,7 +16,7 @@
     });
 </script>
 
-<div class="h-7 flex justify-between items-center  bg-black bg-opacity-18 bg-blur-50  font-sf text-white text-md text-shadow">
+<div class="h-7 flex justify-between items-center  bg-black bg-opacity-18 bg-blur  font-sf text-white text-md text-shadow">
     <div>
         <span class="pl-6 pr-3 pb-px  leading-lg">􀣺</span>
         <span class="p-route font-bold">{page}</span>

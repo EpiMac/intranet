@@ -8,6 +8,7 @@ module.exports = {
     theme: {
         extend: {
             backgroundOpacity: {
+                '14': '0.14',
                 '18': '0.18'
             }
         },

@@ -1,8 +1,8 @@
 import firebase from 'firebase';
 
 import 'firebase/auth';
-import 'firebase/database';
 
+// TODO: Replace with single 'auth' file or folder
 let app;
 
 export function init() {
