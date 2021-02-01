@@ -23,7 +23,7 @@
 <div class="flex flex-grow  text-white">
     <SideBar />
     {#if $user} <!-- TODO: Middleware + Better way ? (Loading + Promise ?) -->
-        <div class="flex flex-col items-center flex-grow  bg-gray-800 bg-opacity-18 bg-blur  font-sf text-shadow  overflow-y-auto no-scrollbar" style="height: calc(100vh - 28px)"> <!-- TODO: !!! -->
+        <div class="flex flex-col items-center flex-grow  bg-gray-800 bg-opacity-18 dark:bg-gray-900 dark:bg-opacity-50 bg-blur  font-sf text-shadow  overflow-y-auto no-scrollbar" style="height: calc(100vh - 28px)"> <!-- TODO: !!! -->
             <div class="flex flex-col items-center  py-24">
                 <div class="w-40 h-40  mb-7  rounded-full">
                     {#if $user.photoURL}

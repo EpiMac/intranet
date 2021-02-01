@@ -42,5 +42,5 @@
             <span class="p-route cursor-pointer" on:click={() => handleLink(l)}>{l.label}</span>
         {/each}
     </div>
-    <span class="w-195px first-capitalize">{date}</span>
+    <span class="w-180px first-capitalize">{date}</span>
 </div>

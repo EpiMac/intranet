@@ -10,8 +10,7 @@
     import { user, setup } from './data/auth';
     setup();
 
-    // TODO: Dark theme
-    $: bg = $user ? 'light' : 'base';
+    $: bg = $user ? 'bg-img-light dark:bg-img-dark' : 'bg-img-base';
 </script>
 
 <!-- TODO: UI animations on load -->
@@ -22,7 +21,9 @@
 <!-- TODO: Error handling -->
 <!-- TODO: Migrate on Firebase -->
 <!-- TODO: Clean code a bit -->
-<main class="w-screen h-screen  flex flex-col  bg-black bg-img-{bg} bg-cover">
+<!-- TODO: Better background assets (full + compressed) -->
+<!-- TODO: Clean fonts ? -->
+<main class="w-screen h-screen  flex flex-col  bg-black {bg} bg-cover">
     <Router> <!-- TODO: Route animations ? -->
         <TopBar />
         <div class="flex flex-grow">

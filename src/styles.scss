@@ -15,13 +15,18 @@
     color: #FF0000;
   }
 
+  @variants dark {
+    .text-red-no-dark {
+      color: #C60D0D;
+    }
+  }
 
   .p-route {
     @apply px-3;
   }
 
-  .w-195px {
-    width: 195px;
+  .w-180px {
+    width: 180px;
   }
 
   .w-225px {
@@ -52,6 +57,12 @@
 
   .bg-img-light {
     background-image: url('./assets/images/light-background.jpg');
+  }
+
+  @variants dark {
+    .bg-img-dark {
+      background-image: url('./assets/images/dark-background.jpg');
+    }
   }
 
   .bg-blur {

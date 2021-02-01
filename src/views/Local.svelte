@@ -16,9 +16,9 @@
 
 <div class="flex flex-grow  text-white">
     <SideBar />
-    <div class="flex-grow  bg-gray-800 bg-opacity-18 bg-blur  font-sf text-shadow overflow-y-auto no-scrollbar" style="height: calc(100vh - 28px)"> <!-- TODO: !!! -->
+    <div class="flex-grow  bg-gray-800 bg-opacity-18 dark:bg-gray-900 dark:bg-opacity-50 bg-blur  font-sf text-shadow overflow-y-auto no-scrollbar" style="height: calc(100vh - 28px)"> <!-- TODO: !!! -->
         <div class="flex flex-col items-center">
-            <div class="flex justify-center items-center  w-60 h-60  mt-20  rounded-full  bg-{opened ? 'green-yes' : 'red-no'} bg-blur  font-bold text-8xl text-shadow">
+            <div class="flex justify-center items-center  w-60 h-60  mt-20  rounded-full  {opened ? 'bg-green-yes' : 'bg-red-no'} bg-blur  font-bold text-8xl text-shadow">
                 {opened ? '􀎥' : '􀎡'}
             </div>
             <div class="font-semibold text-4xl  mt-14 mb-20">
@@ -26,7 +26,7 @@
                 {#if opened}
                     <span class="text-green-300">ouvert</span>
                 {:else}
-                    <span class="text-red-no">fermé</span>
+                    <span class="text-red-no dark:text-red-no-dark">fermé</span>
                 {/if}
             </div>
             <Card title="Horaires d'ouverture">

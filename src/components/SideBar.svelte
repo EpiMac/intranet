@@ -30,12 +30,12 @@
     <img src={logo} alt="Logo de l'Intranet EpiMac" class="px-10 pt-12" />
     <div class="w-full  flex flex-col items-center  mb-20">
         {#each routes as route}
-            <div class="w-9/12  rounded  bg-gray-800 bg-blur bg-opacity-14  px-6 py-3.5 my-2  font-sf text-shadow  cursor-pointer" on:click={() => handleRoute(route)}>
+            <div class="w-9/12  rounded  bg-gray-800 bg-blur bg-opacity-14 dark:bg-gray-900 dark:bg-opacity-40  px-6 py-3.5 my-2  font-sf text-shadow  cursor-pointer" on:click={() => handleRoute(route)}>
                 <span class="inline-block  mr-2.5 w-5  text-center">{route.icon}</span> {route.label}
             </div>
         {/each}
     </div>
-    <button class="bg-trans-red  w-10/12  rounded  py-2.5 mb-10  font-sf" on:click={handleLogout}>
+    <button class="bg-trans-red bg-blur  w-10/12  rounded  py-2.5 mb-10  font-sf" on:click={handleLogout}>
         Se déconnecter
     </button>
 </div>
