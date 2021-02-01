@@ -1,7 +1,8 @@
 <script>
+    import { onMount } from 'svelte';
     import { navigate } from 'svelte-routing';
 
-    import { login } from '../data/auth';
+    import { user, login } from '../data/auth';
     import page from '../data/page';
 
     const logo = require('../assets/images/logo.png');
@@ -10,6 +11,14 @@
     {
         login().then(() => navigate("/profile", { replace: true }));
     }
+
+    onMount(() => {
+        if (user) {
+            navigate('/profile', { replace: true });
+        } else {
+            return user.subscribe(u => u && navigate('/profile', { replace: true }))
+        }
+    })
 
     page.set('Se connecter');
 </script>
