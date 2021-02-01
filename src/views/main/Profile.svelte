@@ -1,26 +1,23 @@
 <script>
+    import { page, user, isLinked } from '../../app/store';
+    import { linkMicrosoft } from '../../app/auth';
+
     import Card from '../../components/Card.svelte';
 
-    import { user, isLinked, linkMicrosoft } from '../../data/auth';
-    import page from '../../data/page';
-
     const msLogo = require('../../assets/images/microsoft_logo.svg');
+
+    page.set('Profil');
 
     function handleLink()
     {
         // TODO: Prevent multiple clicks
         linkMicrosoft();
     }
-
-    page.set('Profil');
 </script>
-
-<svelte:head>
-    <title>EpiMac Intranet - Profil</title>
-</svelte:head>
 
 <div class="flex flex-col items-center  py-24">
     <div class="w-40 h-40  mb-7  rounded-full">
+        <!-- TODO: Allow profile picture edition -->
         {#if $user.photoURL}
             <img src={$user.photoURL} alt="Image de l'utilisateur" />
         {:else}
@@ -54,4 +51,5 @@
         </button>
     {/if}
 </Card>
+
 <div class="text-transparent text-xs">.</div> <!-- TODO: !!!!! -->

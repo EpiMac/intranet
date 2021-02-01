@@ -1,7 +1,6 @@
 <script>
     import { onMount } from 'svelte';
-
-    import page from '../data/page';
+    import { page } from '../app/store';
 
     const links = [
         { label: 'Retour à l\'accueil', url: 'https://www.epimac.org/' },
@@ -15,7 +14,9 @@
         hour: 'numeric', minute: 'numeric', second: 'numeric'
     });
 
-    onMount(() => {
+
+    onMount(() =>
+    {
         const interval = setInterval(() => time = new Date(), 1000);
         return () => clearInterval(interval);
     });

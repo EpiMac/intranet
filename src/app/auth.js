@@ -1,12 +1,7 @@
 import firebase from 'firebase/app';
-import { writable } from 'svelte/store';
+import 'firebase/auth';
 
-// TODO: >:( Move this to a better place
-import { init } from '.';
-init();
-
-export const user = writable(null);
-export const isLinked = writable(false);
+import { user, isLinked } from './store';
 
 // TODO: Fill in more
 const allowedEmails = [
@@ -14,19 +9,23 @@ const allowedEmails = [
     'epitech.eu'
 ];
 
-export function setup()
+function init()
 {
-    firebase.auth().onAuthStateChanged(u => {
-        if (!u) return;
+    firebase
+        .initializeApp(require('../../firebase.json'))
+        .auth()
+        .onAuthStateChanged(u => {
+            if (!u) return;
 
-        user.set(u);
-        isLinked.set(u.providerData.length === 2);
-    });
+            user.set(u);
+            isLinked.set(u.providerData.length === 2);
+        });
 }
 
 export function login()
 {
-    return firebase.auth()
+    return firebase
+        .auth()
         .signInWithPopup(getAppleProvider())
         .then(result => {
             console.log('>> Auth success');
@@ -43,17 +42,25 @@ export function login()
 export function linkMicrosoft()
 {
     const provider = getMicrosoftProvider();
-    return firebase.auth()
-        .currentUser.linkWithPopup(provider)
+
+    return firebase
+        .auth()
+        .currentUser
+        .linkWithPopup(provider)
         .then(result => {
             console.log('>> MS Auth success');
 
             const email = result.user.providerData[1].email;
             if (!allowedEmails.find(s => email.endsWith(`@${s}`) || email.endsWith(`.${s}`))) {
                 // TODO: Real error modal
-                // TODO: and ... ><
+                // TODO: Move to cloud function
                 alert("Ce compte Microsoft n'est pas celui d'une école IONIS");
-                return firebase.auth().currentUser.unlink(provider.providerId).then(() => false);
+
+                return firebase
+                    .auth()
+                    .currentUser
+                    .unlink(provider.providerId)
+                    .then(() => false);
             }
 
             isLinked.set(true);
@@ -90,3 +97,5 @@ function getMicrosoftProvider()
 {
     return new firebase.auth.OAuthProvider('microsoft.com');
 }
+
+init();

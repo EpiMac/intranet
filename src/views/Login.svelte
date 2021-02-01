@@ -2,17 +2,15 @@
     import { onMount } from 'svelte';
     import { navigate } from 'svelte-routing';
 
-    import { user, login } from '../data/auth';
-    import page from '../data/page';
+    import { page, user } from '../app/store';
+    import { login } from '../app/auth';
 
     const logo = require('../assets/images/logo.png');
 
-    function handleLogin()
-    {
-        login().then(() => navigate("/app/profile", { replace: true }));
-    }
+    page.set('Se connecter');
 
-    onMount(() => {
+    onMount(() =>
+    {
         if ($user) {
             navigate('/app/profile', { replace: true });
         } else {
@@ -20,7 +18,12 @@
         }
     });
 
-    page.set('Se connecter');
+    function handleLogin()
+    {
+        login().then(() => {
+            navigate('/app/profile', { replace: true });
+        });
+    }
 </script>
 
 <div class="flex flex-grow flex-col justify-evenly items-center  py-14">
@@ -33,6 +36,7 @@
 
     <p class="w-400px  text-white text-center text-sm font-sf font-light">
         En cliquant sur "Continuer avec Apple" vous certifiez avoir
-        pris connaissance des <span class="underline">mentions légales</span>
+        pris connaissance des
+        <a class="underline" href="https://www.epimac.org/mentions-legales/" target="_blank">mentions légales</a>
     </p>
 </div>

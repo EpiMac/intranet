@@ -1,6 +1,6 @@
 <script>
     import { navigate } from 'svelte-routing';
-    import { logout } from '../data/auth';
+    import { logout } from '../app/auth';
 
     const logo = require('../assets/images/logo.png'); // TODO: Fix this webpack bug >:(
     const routes = [
@@ -11,6 +11,7 @@
         { label: 'Ouverture du local', icon: '􀎡', route: '/app/local' }
     ];
 
+
     function handleRoute({ route })
     {
         if (route) {
@@ -20,7 +21,9 @@
 
     function handleLogout()
     {
-        logout().then(() => navigate('/', { replace: true }));
+        logout().then(() => {
+            navigate('/', { replace: true });
+        });
     }
 </script>
 

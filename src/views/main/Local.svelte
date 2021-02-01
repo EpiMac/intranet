@@ -1,15 +1,11 @@
 <script>
+    import { page } from '../../app/store';
     import Card from '../../components/Card.svelte';
-    import page from '../../data/page';
 
-    let opened = false;
+    let opened = false; // TODO: Dynamic (webhook?)
 
     page.set('Ouverture du local');
 </script>
-
-<svelte:head>
-    <title>EpiMac Intranet - Ouverture du local</title>
-</svelte:head>
 
 <div class="flex flex-col items-center">
     <div class="flex justify-center items-center  w-60 h-60  mt-20  rounded-full  {opened ? 'bg-green-yes' : 'bg-red-no'} bg-blur  text-8xl text-shadow">

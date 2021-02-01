@@ -6,7 +6,7 @@
     import Profile from './main/Profile.svelte';
     import Local from './main/Local.svelte'
 
-    import { user } from '../data/auth';
+    import { user } from '../app/store';
 </script>
 
 <SideBar />
@@ -17,8 +17,8 @@
         font-sf text-white text-shadow
         overflow-y-auto no-scrollbar
     "
-    style="height: calc(100vh - 28px)"
-> <!-- TODO: !!! -->
+    style="height: calc(100vh - 28px); /* TODO: !!! */"
+>
     {#if $user}
         <Router>
             <Route path="/profile" component={Profile} />

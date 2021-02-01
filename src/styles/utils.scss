@@ -1,3 +1,7 @@
+/**
+ * TODO: Investigate why is this not hot-reloaded >:(
+ */
+
 @layer utilities {
   .text-shadow {
     text-shadow: 0 1px 1px rgba(0, 0, 0, .1), 0 1px 4px rgba(0, 0, 0, .2);
@@ -52,16 +56,16 @@
 
 
   .bg-img-base {
-    background-image: url('./assets/images/base-background.png');
+    background-image: url('../assets/images/base-background.png');
   }
 
   .bg-img-light {
-    background-image: url('./assets/images/light-background.jpg');
+    background-image: url('../assets/images/light-background.jpg');
   }
 
   @variants dark {
     .bg-img-dark {
-      background-image: url('./assets/images/dark-background.jpg');
+      background-image: url('../assets/images/dark-background.jpg');
     }
   }
 

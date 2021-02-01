@@ -1,8 +1,9 @@
 import 'tailwindcss/base.css';
 import 'tailwindcss/utilities.css';
 
-import './fonts.scss';
-import './styles.scss';
+import './styles/fonts.scss';
+import './styles/utils.scss';
+
 
 import App from './App.svelte';
 
