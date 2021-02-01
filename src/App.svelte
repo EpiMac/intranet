@@ -6,10 +6,21 @@
     import Login from './views/Login.svelte';
     import Main from './views/Main.svelte';
 
-    import { page, user } from './app/store';
+    import { page } from './app/store';
 
-    // Make it route dependant
-    $: bg = $user ? 'bg-img-light dark:bg-img-dark' : 'bg-img-base';
+    let bg;
+
+    updateBackground();
+    page.subscribe(updateBackground);
+
+    function updateBackground()
+    {
+        if (window.location.pathname.startsWith('/app')) {
+            bg = 'bg-img-light dark:bg-img-dark';
+        } else {
+            bg = 'bg-img-base';
+        }
+    }
 </script>
 
 <svelte:head>
