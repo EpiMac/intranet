@@ -14,8 +14,7 @@ module.exports = {
         },
         fontFamily: {
             'sf-display': ['"SF Pro Display"', 'Arial', 'sans-serif'],
-            'sf': ['"SF Pro Text"', 'Arial', 'sans-serif'],
-            'sf-icons': ['"SF Pro Icons', 'Arial', 'sans-serif']
+            'sf': ['"SF Pro Text"', 'Arial', 'sans-serif']
         }
     },
     variants: {
