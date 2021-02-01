@@ -17,6 +17,8 @@ const allowedEmails = [
 export function setup()
 {
     firebase.auth().onAuthStateChanged(u => {
+        if (!u) return;
+
         user.set(u);
         isLinked.set(u.providerData.length === 2);
     });
