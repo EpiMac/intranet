@@ -48,10 +48,7 @@ export function linkMicrosoft()
         .then(result => {
             console.log('>> MS Auth success');
 
-            const email = result.user.email;
-            console.log('Allowed emails');
-            console.log(allowedEmails);
-            console.log(email);
+            const email = result.user.providerData[1].email;
             if (!allowedEmails.find(s => email.endsWith(`@${s}`) || email.endsWith(`.${s}`))) {
                 // TODO: Real error modal
                 // TODO: and ... ><
