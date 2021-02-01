@@ -1,6 +1,8 @@
 <script>
     import { navigate } from 'svelte-routing';
+
     import { login } from '../data/auth';
+    import page from '../data/page';
 
     const logo = require('../assets/images/logo.png');
 
@@ -8,6 +10,8 @@
     {
         login().then(() => navigate("/profile", { replace: true }));
     }
+
+    page.set('Se connecter');
 </script>
 
 <div class="flex flex-grow flex-col justify-evenly items-center  py-14">

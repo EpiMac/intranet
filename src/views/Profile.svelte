@@ -5,6 +5,7 @@
     import SideBar from '../components/SideBar.svelte';
 
     import { user, isLinked, linkMicrosoft, deleteAccount } from '../data/auth';
+    import page from '../data/page';
 
     const msLogo = require('../assets/images/microsoft_logo.svg');
 
@@ -18,6 +19,8 @@
     {
         deleteAccount().then(() => navigate('/', { replace: true }));
     }
+
+    page.set('Profil');
 </script>
 
 <div class="flex flex-grow  text-white">
