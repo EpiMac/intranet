@@ -4,8 +4,7 @@
     import TopBar from './components/TopBar.svelte';
 
     import Login from './views/Login.svelte';
-    import Profile from './views/Profile.svelte';
-    import Local from './views/Local.svelte';
+    import Main from './views/Main.svelte';
 
     import { user, setup } from './data/auth';
     setup();
@@ -14,22 +13,17 @@
 </script>
 
 <!-- TODO: UI animations on load -->
-<!-- TODO: Better load time handle no background -->
 <!-- TODO: Responsive -->
 <!-- TODO: Middlewares (routing security) -->
 <!-- TODO: Fill in empty pages -->
 <!-- TODO: Error handling -->
-<!-- TODO: Migrate on Firebase -->
 <!-- TODO: Clean code a bit -->
-<!-- TODO: Better background assets (full + compressed) -->
-<!-- TODO: Clean fonts ? -->
 <main class="w-screen h-screen  flex flex-col  bg-black {bg} bg-cover">
     <Router> <!-- TODO: Route animations ? -->
         <TopBar />
         <div class="flex flex-grow">
             <Route path="/" component={Login} />
-            <Route path="/profile" component="{Profile}" />
-            <Route path="/local" component="{Local}" />
+            <Route path="/app/*" component="{Main}" />
         </div>
     </Router>
 </main>

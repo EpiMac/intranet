@@ -9,16 +9,16 @@
 
     function handleLogin()
     {
-        login().then(() => navigate("/profile", { replace: true }));
+        login().then(() => navigate("/app/profile", { replace: true }));
     }
 
     onMount(() => {
         if ($user) {
-            navigate('/profile', { replace: true });
+            navigate('/app/profile', { replace: true });
         } else {
-            return user.subscribe(u => u && navigate('/profile', { replace: true }))
+            return user.subscribe(u => u && navigate('/app/profile', { replace: true }))
         }
-    })
+    });
 
     page.set('Se connecter');
 </script>

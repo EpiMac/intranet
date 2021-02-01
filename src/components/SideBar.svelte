@@ -4,11 +4,11 @@
 
     const logo = require('../assets/images/logo.png'); // TODO: Fix this webpack bug >:(
     const routes = [
-        { label: 'Profil', icon: '􀉮', route: '/profile' },
+        { label: 'Profil', icon: '􀉮', route: '/app/profile' },
         { label: 'Magasin', icon: '􀍪' },
         { label: 'Avantages', icon: '􀋃' },
         { label: 'Fichiers', icon: '􀈖' },
-        { label: 'Ouverture du local', icon: '􀎡', route: '/local' }
+        { label: 'Ouverture du local', icon: '􀎡', route: '/app/local' }
     ];
 
     function handleRoute({ route })
@@ -23,8 +23,6 @@
         logout().then(() => navigate('/', { replace: true }));
     }
 </script>
-
-<!-- TODO: Sub router -->
 
 <div class="w-400px h-full  flex flex-col justify-between items-center flex-shrink-0  text-white">
     <img src={logo} alt="Logo de l'Intranet EpiMac" class="px-10 pt-12" />
