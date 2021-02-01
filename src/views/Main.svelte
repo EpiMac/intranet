@@ -25,7 +25,7 @@
             <Route path="/local" component={Local} />
         </Router>
     {:else}
-        <div class="flex flex-grow items-center  font-bold font-2xl">
+        <div class="flex flex-grow items-center  font-bold text-3xl">
             Chargement...
         </div>
     {/if}

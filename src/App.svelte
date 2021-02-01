@@ -9,6 +9,7 @@
     import { user, setup } from './data/auth';
     setup();
 
+    // Make it route dependant
     $: bg = $user ? 'bg-img-light dark:bg-img-dark' : 'bg-img-base';
 </script>
 
