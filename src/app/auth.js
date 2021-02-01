@@ -29,9 +29,14 @@ export function login()
         .signInWithPopup(getAppleProvider())
         .then(result => {
             console.log('>> Auth success');
+            if (!result.user) {
+                return false;
+            }
 
             user.set(result.user);
             isLinked.set(result.user.providerData.length === 2);
+
+            return true;
         })
         .catch(error => {
             console.error('>> Auth error');

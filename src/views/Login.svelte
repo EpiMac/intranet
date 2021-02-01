@@ -20,9 +20,7 @@
 
     function handleLogin()
     {
-        login().then(() => {
-            navigate('/app/profile', { replace: true });
-        });
+        login().then(r => r && navigate('/app/profile', { replace: true }));
     }
 </script>
 
