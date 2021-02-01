@@ -13,10 +13,9 @@ module.exports = {
             }
         },
         fontFamily: {
-            'sf-compact-display': ['"SF Compact Display"', 'Arial', 'sans-serif'],
-            'sf-compact': ['"SF Compact Text"', 'Arial', 'sans-serif'],
             'sf-display': ['"SF Pro Display"', 'Arial', 'sans-serif'],
-            'sf': ['"SF Pro Text"', 'Arial', 'sans-serif']
+            'sf': ['"SF Pro Text"', 'Arial', 'sans-serif'],
+            'sf-icons': ['"SF Pro Icons', 'Arial', 'sans-serif']
         }
     },
     variants: {

@@ -2,26 +2,22 @@
  * San Francisco fonts
  */
 
-@mixin font($family, $type, $weight: 'Regular', $weightVal: 400, $italic: false) {
+@mixin font($family, $type, $weight: 'Regular', $weightVal: 400) {
   @font-face {
     font-family: 'SF #{$family} #{$type}';
     font-weight: $weightVal;
-    @if($italic) {
-      font-style: italic;
-    }
 
-    src: url('./assets/fonts/SF-#{$family}-#{$type}-#{$weight}#{if($italic, 'Italic', '')}.otf') format('opentype');
+    src: url('./assets/fonts/sf-#{to-lower-case($family)}-#{to-lower-case($type)}_#{$weight}.woff2') format('woff2');
   }
 }
 
 
-@include font('Compact', 'Display', 'Light', 300);
-@include font('Compact', 'Display');
-@include font('Compact', 'Text', 'Light', 300);
+@include font('Pro', 'Display', 'semibold', 600);
+@include font('Pro', 'Text', 'light', 300);
+@include font('Pro', 'Text', 'semibold', 600);
+@include font('Pro', 'Text', 'bold', 700);
 
-@include font('Pro', 'Display', 'Bold', 700);
-@include font('Pro', 'Display', 'Semibold', 600);
-@include font('Pro', 'Text', 'Bold', 700);
-@include font('Pro', 'Text', 'Light', 300, true);
-@include font('Pro', 'Text');
-@include font('Pro', 'Text', 'Semibold', 600);
+@font-face {
+  font-family: 'SF Pro Text';
+  src: url('./assets/fonts/sf-pro-text_regular.otf') format('opentype');
+}

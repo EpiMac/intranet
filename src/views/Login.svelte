@@ -31,7 +31,7 @@
         <span class="-mt-px mr-2.5">􀣺</span> Continuer avec Apple
     </button>
 
-    <p class="w-400px  text-white text-center text-sm font-sf-compact-display font-light">
+    <p class="w-400px  text-white text-center text-sm font-sf font-light">
         En cliquant sur "Continuer avec Apple" vous certifiez avoir
         pris connaissance des <span class="underline">mentions légales</span>
     </p>
