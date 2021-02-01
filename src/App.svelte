@@ -5,6 +5,7 @@
 
     import Login from './views/Login.svelte';
     import Profile from './views/Profile.svelte';
+    import Local from './views/Local.svelte';
 
     import { user, setup } from './data/auth';
     setup();
@@ -19,6 +20,7 @@
         <div class="flex flex-grow">
             <Route path="/" component={Login} />
             <Route path="/profile" component="{Profile}" />
+            <Route path="/local" component="{Local}" />
         </div>
     </Router>
 </main>
