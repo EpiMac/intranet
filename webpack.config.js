@@ -3,7 +3,6 @@ const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
-const { EnvironmentPlugin } = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
@@ -80,14 +79,6 @@ module.exports = {
 		new CopyPlugin({
 			patterns: [{ from: 'public' }]
 		}),
-		new EnvironmentPlugin([
-			'FIREBASE_API_KEY',
-			'FIREBASE_AUTH_DOMAIN',
-			'FIREBASE_PROJECT_ID',
-			'FIREBASE_STORAGE_BUCKET',
-			'FIREBASE_MESSAGING_SENDER_ID',
-			'FIREBASE_APP_ID'
-		]),
 		new HtmlWebpackPlugin({
 			template: './public/index.html',
 			publicPath: '/'
