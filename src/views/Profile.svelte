@@ -1,10 +1,8 @@
 <script>
-    import { navigate } from 'svelte-routing';
-
     import Card from '../components/Card.svelte';
     import SideBar from '../components/SideBar.svelte';
 
-    import { user, isLinked, linkMicrosoft, deleteAccount } from '../data/auth';
+    import { user, isLinked, linkMicrosoft } from '../data/auth';
     import page from '../data/page';
 
     const msLogo = require('../assets/images/microsoft_logo.svg');
@@ -15,17 +13,7 @@
         linkMicrosoft();
     }
 
-    function handleDeleteAccount()
-    {
-        deleteAccount().then(() => navigate('/', { replace: true }));
-    }
-
     page.set('Profil');
-
-    user.subscribe(u => {
-        console.log('User changed : ');
-        console.log(u);
-    })
 </script>
 
 <svelte:head>
@@ -70,15 +58,6 @@
                         Se connecter via Microsoft
                     </button>
                 {/if}
-            </Card>
-            <Card title="Supprimer le compte">
-                <p>
-                    Supprime définitivement votre compte et efface toutes vous données des serveurs.
-                    Cette action est irreversible, mais n'empêche pas la recréation d'un compte.
-                </p>
-                <button class="bg-trans-red  rounded   px-14 py-2 mt-5  font-sf" on:click={handleDeleteAccount}>
-                   Supprimer le compte
-                </button>
             </Card>
             <div class="text-transparent text-xs">.</div> <!-- TODO: !!!!! -->
         </div>

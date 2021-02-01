@@ -49,6 +49,9 @@ export function linkMicrosoft()
             console.log('>> MS Auth success');
 
             const email = result.user.email;
+            console.log('Allowed emails');
+            console.log(allowedEmails);
+            console.log(email);
             if (!allowedEmails.find(s => email.endsWith(`@${s}`) || email.endsWith(`.${s}`))) {
                 // TODO: Real error modal
                 // TODO: and ... ><
@@ -68,12 +71,6 @@ export function linkMicrosoft()
 export function logout()
 {
     return firebase.auth().signOut().then(clear);
-}
-
-export function deleteAccount()
-{
-    // TODO: Handle re-auth asking
-    return firebase.auth().currentUser.delete().then(clear);
 }
 
 function clear()
