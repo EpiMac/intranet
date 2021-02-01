@@ -14,8 +14,15 @@
     $: bg = $user ? 'light' : 'base';
 </script>
 
+<!-- TODO: UI animations on load -->
+<!-- TODO: Better load time handle no background -->
+<!-- TODO: Responsive -->
+<!-- TODO: Middlewares (routing security) -->
+<!-- TODO: Fill in empty pages -->
+<!-- TODO: Error handling -->
+<!-- TODO: Migrate on Firebase -->
 <main class="w-screen h-screen  flex flex-col  bg-img-{bg} bg-cover">
-    <Router>
+    <Router> <!-- TODO: Route animations ? -->
         <TopBar />
         <div class="flex flex-grow">
             <Route path="/" component={Login} />

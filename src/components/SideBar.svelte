@@ -2,7 +2,7 @@
     import { navigate } from 'svelte-routing';
     import { logout } from '../data/auth';
 
-    const logo = require('../assets/images/logo.png');
+    const logo = require('../assets/images/logo.png'); // TODO: Fix this webpack bug >:(
     const routes = [
         { label: 'Profil', icon: '􀉮', route: '/profile' },
         { label: 'Magasin', icon: '􀍪' },
