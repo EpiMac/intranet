@@ -1,4 +1,4 @@
-import firebase from 'firebase';
+import firebase from 'firebase/app';
 import { writable } from 'svelte/store';
 
 // TODO: >:( Move this to a better place

@@ -1,9 +1,14 @@
 module.exports = {
-    purge: [
-        './src/**/*.html',
-        './src/**/*.svelte',
-        './src/**/*.js'
-    ],
+    purge: {
+        content: [
+            './src/**/*.html',
+            './src/**/*.svelte',
+            './src/**/*.js'
+        ],
+        options: {
+            safelist: ['bg-img-base', 'bg-img-light']
+        }
+    },
     darkMode: 'media',
     theme: {
         extend: {
