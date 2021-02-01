@@ -6,7 +6,7 @@ module.exports = {
             './src/**/*.js'
         ],
         options: {
-            safelist: ['bg-img-base', 'bg-img-light']
+            safelist: ['bg-img-base', 'bg-img-light', 'bg-green-yes', 'bg-green-no']
         }
     },
     darkMode: 'media',
