@@ -21,7 +21,8 @@
 <!-- TODO: Fill in empty pages -->
 <!-- TODO: Error handling -->
 <!-- TODO: Migrate on Firebase -->
-<main class="w-screen h-screen  flex flex-col  bg-img-{bg} bg-cover">
+<!-- TODO: Clean code a bit -->
+<main class="w-screen h-screen  flex flex-col  bg-black bg-img-{bg} bg-cover">
     <Router> <!-- TODO: Route animations ? -->
         <TopBar />
         <div class="flex flex-grow">
