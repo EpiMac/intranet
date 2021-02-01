@@ -21,6 +21,11 @@
     }
 
     page.set('Profil');
+
+    user.subscribe(u => {
+        console.log('User changed : ');
+        console.log(u);
+    })
 </script>
 
 <svelte:head>

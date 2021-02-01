@@ -72,6 +72,7 @@ export function logout()
 
 export function deleteAccount()
 {
+    // TODO: Handle re-auth asking
     return firebase.auth().currentUser.delete().then(clear);
 }
 
