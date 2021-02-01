@@ -13,7 +13,7 @@
     }
 
     onMount(() => {
-        if (user) {
+        if ($user) {
             navigate('/profile', { replace: true });
         } else {
             return user.subscribe(u => u && navigate('/profile', { replace: true }))
