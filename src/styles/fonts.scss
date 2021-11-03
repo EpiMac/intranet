@@ -7,17 +7,17 @@
     font-family: 'SF #{$family} #{$type}';
     font-weight: $weightVal;
 
-    src: url('../assets/fonts/sf-#{to-lower-case($family)}-#{to-lower-case($type)}_#{$weight}.woff2') format('woff2');
+    src: url('/fonts/sf-#{to-lower-case($family)}-#{to-lower-case($type)}_#{$weight}.woff2') format('woff2');
   }
 }
 
 
 @include font('Pro', 'Display', 'semibold', 600);
-@include font('Pro', 'Text', 'light', 300);
+// @include font('Pro', 'Text', 'light', 300);
 @include font('Pro', 'Text', 'semibold', 600);
 @include font('Pro', 'Text', 'bold', 700);
 
 @font-face {
   font-family: 'SF Pro Text';
-  src: url("../assets/fonts/sf-pro-text_regular.otf") format('opentype');
+  src: url("/fonts/sf-pro-text_regular.otf") format('opentype');
 }

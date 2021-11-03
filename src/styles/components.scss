@@ -1,0 +1,75 @@
+@import './vars';
+@import './mixins';
+
+button, a {
+    cursor: pointer;
+
+    &:not(.opaque) {
+        @include clickable(opacity, .75, .5);
+    }
+}
+
+h1, h2, h3 {
+    margin: 0;
+
+    font-family: $font-sf-display;
+}
+
+p {
+    margin: 0;
+    white-space: pre-line;
+}
+
+$vertical-padding: 10px;
+
+input, button {
+    padding: 10px 15px;
+
+    font-size: 15px;
+
+    background-color: rgba(0, 0, 0, .2);
+    color: white;
+
+    border: none;
+    outline: none;
+
+    border-radius: 5px;
+}
+
+input {
+    padding: $vertical-padding 15px;
+
+    transition: color .1s;
+
+    &[readonly] {
+        color: #ccc;
+    }
+}
+
+button {
+    padding: $vertical-padding 75px;
+}
+
+.card {
+    padding: 20px 28px;
+
+    background-color: rgba(17, 24, 39, 0.5);
+
+    border-radius: 4px;
+}
+
+.blurred {
+    backdrop-filter: blur(50px) saturate(125%);
+    text-shadow: 0 1px 1px rgba(0, 0, 0, .1), 0 1px 4px rgba(0, 0, 0, .2);
+}
+
+.no-scrollbar {
+    overflow-y: scroll;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+
+    &::-webkit-scrollbar { /* WebKit */
+        width: 0;
+        height: 0;
+    }
+}
