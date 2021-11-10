@@ -24,3 +24,14 @@ export async function createUser(user)
         RETURNING *
     `;
 }
+
+export async function updateUser(appleId, user)
+{
+    return sql`
+        UPDATE users SET ${
+            sql(user, 'email', 'first_name', 'last_name', 'phone_number')
+        } WHERE apple_id = ${appleId}
+
+        RETURNING *
+    `;
+}

@@ -76,6 +76,10 @@
         flex-grow: 1;
     }
 
+    #panel, #content {
+        overflow-y: auto;
+    }
+
     #side-bar {
         flex-shrink: 0;
         flex-direction: column;

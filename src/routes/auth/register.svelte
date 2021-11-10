@@ -25,8 +25,8 @@
     // TODO: Better validation
     let registering = false;
     let fields = [
-        { name: 'first_name', label: 'Prénom', value: '' },
-        { name: 'last_name', label: 'Nom de famille', value: '' },
+        { name: 'first_name', label: 'Prénom', value: user.first_name || '' },
+        { name: 'last_name', label: 'Nom de famille', value: user.last_name || '' },
         { name: 'email', label: 'E-Mail', value: user.email },
         { name: 'phone_number', label: 'Numéro de téléphone', value: '' },
         { name: 'promo', label: 'Promotion', value: '', optional: true }
