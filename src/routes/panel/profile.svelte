@@ -157,6 +157,8 @@
         }
 
         #submit {
+            margin-top: 5px;
+
             background-color: wheat;
             color: black;
 

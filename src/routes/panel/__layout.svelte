@@ -25,7 +25,7 @@
     const routes = [
         { label: 'Profil', icon: '􀉮', route: '/panel/profile' },
         { label: 'Magasin', icon: '􀍪' },
-        { label: 'Avantages', icon: '􀋃' },
+        { label: 'Avantages', icon: '􀋃', route: '/panel/perks' },
         { label: 'Fichiers', icon: '􀈖' },
         { label: 'Ouverture du local', icon: '􀎡' }
     ];

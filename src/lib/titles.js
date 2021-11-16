@@ -4,5 +4,7 @@ export default {
     '/auth/close': 'Connexion réussie',
     '/auth/login': 'Se connecter',
     '/auth/register': 'S\'inscrire',
-    '/panel/profile': 'Profil'
+    
+    '/panel/profile': 'Profil',
+    '/panel/perks': 'Avantages'
 };
