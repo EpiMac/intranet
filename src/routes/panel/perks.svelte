@@ -10,7 +10,7 @@
 </script>
 
 <script>
-    import MsLogo from '/assets/microsoft_logo.svg';
+    import MsLogo from '/assets/microsoft_logo.svg?raw';
 
     export let user;
 </script>
@@ -29,7 +29,7 @@
         <li>100Go de stockage iCloud</li>
     </ul>
     <button class="login">
-        <img class="ms" src={MsLogo} alt="Microsoft" />
+        <div class="ms">{@html MsLogo}</div>
         Se connecter via Microsoft
     </button>
 </div>

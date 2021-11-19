@@ -17,13 +17,12 @@
 </script>
 
 <script>
-    import { goto } from '$app/navigation';
     import { session } from '$app/stores';
+
+    import Form from '$components/Form.svelte';
 
     export let user;
 
-    // TODO: Better validation
-    let registering = false;
     let fields = [
         { name: 'first_name', label: 'Prénom', value: user.first_name || '' },
         { name: 'last_name', label: 'Nom de famille', value: user.last_name || '' },
@@ -32,35 +31,12 @@
         { name: 'promo', label: 'Promotion', value: '', optional: true }
     ];
 
-    function handleRegistration()
+    function handleRegistration({ detail: { user }})
     {
-        if (registering) {
-            return;
-        }
-
-        registering = true;
-
-        const data = {};
-        for (const { name, value } of fields) {
-            if (value.trim() !== '') {
-                data[name] = value;
-            }
-        }
-
-        fetch('/auth/register.json', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        }).then(r => r.json()).then(({ user }) => {
-            session.update(s => ({ ...s, user }));
-            goto('/');
-        }).catch(err => console.error(err));
+        session.update(s => ({ ...s, user }));
     }
 
     $: logged = $session.user; // TODO: Issue about this being needed
-    $: canRegister = fields.filter(({ value, optional }) => !optional && value.trim() === '').length === 0;
 </script>
 
 <div id="register-container">
@@ -80,29 +56,15 @@
 
         <h2 class="subtitle">Informations personnelles</h2>
 
-        <form id="form" on:submit|preventDefault={handleRegistration}>
-            {#each fields as field, i}
+        <Form label="S'inscrire" endpoint="/auth/register.json" {fields} on:posted={handleRegistration}>
+            <div slot="field" class="field-slot" let:field>
                 {#if field.name === 'promo'}
-                    <p class="info">
+                    <p class="field-info">
                         Si vous êtes étudiant, merci de renseigner votre promotion. Sinon, laissez ce champ vide.
                     </p>
                 {/if}
-
-                <div class="field-group">
-                    <div class="label">
-                        {field.label}
-                        {#if !field.optional}
-                            <span class="star">*</span>
-                        {/if}
-                    </div>
-                    <input class="input" bind:value={field.value} readonly={registering} />
-                </div>
-            {/each}
-
-            <div id="submit-container">
-                <button id="submit" disabled={!canRegister || registering}>S'inscrire</button>
             </div>
-        </form>
+        </Form>
     </div>
 </div>
 
@@ -125,53 +87,20 @@
         margin-bottom: 20px;
     }
 
-    .subtitle {
-        margin: 17px 0;
-    }
-
     .info .email {
         font-weight: bold;
     }
 
-    #form {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        grid-gap: 15px 100px;
+    .subtitle {
+        margin: 17px 0;
+    }
 
-        margin-bottom: 5px;
+    .field-slot {
+        display: contents;
 
-        .field-group {
-            flex-direction: column;
-
-            .label {
-                margin-left: 1px;
-                margin-bottom: 5px;
-
-                font-size: 14px;
-
-                .star {
-                    margin-left: 4px;
-
-                    color: #e03721;
-                }
-            }
-        }
-
-        .info {
+        .field-info {
             margin: 5px 0;
             grid-column: span 2;
-        }
-
-        #submit-container {
-            margin-top: 15px;
-            grid-column: span 2;
-        }
-
-        #submit {
-            background-color: wheat;
-            color: black;
-
-            font-size: 18px;
         }
     }
 </style>

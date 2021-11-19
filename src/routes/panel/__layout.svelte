@@ -11,7 +11,7 @@
         }
 
         return {
-            stuff: { user }
+            stuff: { user, submitted: session && session.submitted }
         };
     }
 </script>

@@ -2,21 +2,23 @@
     /**
      * @type {import('@sveltejs/kit').Load}
      */
-    export async function load({ stuff: { user } }) {
+    export async function load({ stuff: { user, submitted } }) {
         return {
-            props: { user }
+            props: { user, submitted }
         };
     }
 </script>
 
 <script>
-    // TODO: Generify with register.svelte
-
+    import { cubicIn } from 'svelte/easing';
+    import { fade } from 'svelte/transition';
     import { session } from '$app/stores';
 
-    export let user;
+    import Form from '$components/Form.svelte';
 
-    let applying = false;
+    export let user;
+    export let submitted;
+
     let fields = [
         { name: 'first_name', label: 'Prénom', value: user.first_name },
         { name: 'last_name', label: 'Nom de famille', value: user.last_name },
@@ -24,34 +26,15 @@
         { name: 'phone_number', label: 'Numéro de téléphone', value: user.phone_number }
     ];
 
-    function handleEdition()
+    function handleEdition({ detail: { user: u } })
     {
-        if (applying) {
-            return;
-        }
+        // This will trigger a soft-reload of the page sometimes
+        session.update(s => ({ ...s, user: u, submitted: true }));
 
-        applying = true;
-
-        const data = {};
-        for (const { name, value } of fields) {
-            if (value.trim() !== '') {
-                data[name] = value;
-            }
-        }
-
-        fetch('/panel/profile.json', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        }).then(r => r.json()).then(({ user }) => {
-            // This will trigger a soft-reload of the page
-            session.update(s => ({ ...s, user }));
-        }).catch(err => console.error(err));
+        // But sometimes not, so...
+        submitted = true;
+        user = u;
     }
-
-    $: canApply = fields.filter(({ value, optional }) => !optional && value.trim() === '').length === 0;
 </script>
 
 <div class="header">
@@ -63,23 +46,13 @@
 <div class="edit card">
     <h1>Éditer son profil</h1>
 
-    <form id="form" on:submit|preventDefault={handleEdition}>
-        {#each fields as field, i}
-            <div class="field-group">
-                <div class="label">
-                    {field.label}
-                    {#if !field.optional}
-                        <span class="star">*</span>
-                    {/if}
-                </div>
-                <input class="input" bind:value={field.value} readonly={applying} />
-            </div>
-        {/each}
-
-        <div id="submit-container">
-            <button id="submit" disabled={!canApply || applying}>Éditer</button>
+    <Form label="Éditer" endpoint="/panel/profile.json" {fields} on:posted={handleEdition}>
+        <div class="submitted" slot="submit" in:fade={{ easing: cubicIn, duration: 100 }}>
+            {#if submitted}
+                􀁣 Modifications enregistrées
+            {/if}
         </div>
-    </form>
+    </Form>
 </div>
 
 <style lang="scss">
@@ -127,42 +100,17 @@
         }
     }
 
-    #form {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        grid-gap: 15px 150px;
+    :global(.form) {
+        grid-gap: 15px 150px !important;
+    }
 
-        margin-bottom: 5px;
+    :global(.submit-container) {
+        margin-top: 20px;
+    }
 
-        .field-group {
-            flex-direction: column;
+    .submitted {
+        align-items: center;
 
-            .label {
-                margin-left: 1px;
-                margin-bottom: 5px;
-
-                font-size: 14px;
-
-                .star {
-                    margin-left: 4px;
-
-                    color: #e03721;
-                }
-            }
-        }
-
-        #submit-container {
-            margin-top: 15px;
-            grid-column: span 2;
-        }
-
-        #submit {
-            margin-top: 5px;
-
-            background-color: wheat;
-            color: black;
-
-            font-size: 18px;
-        }
+        margin-left: 15px;
     }
 </style>
