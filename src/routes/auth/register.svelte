@@ -57,7 +57,7 @@
         <h2 class="subtitle">Informations personnelles</h2>
 
         <Form label="S'inscrire" endpoint="/auth/register.json" {fields} on:posted={handleRegistration}>
-            <div slot="field" class="field-slot" let:field>
+            <div slot="field" class="slot" let:field>
                 {#if field.name === 'promo'}
                     <p class="field-info">
                         Si vous êtes étudiant, merci de renseigner votre promotion. Sinon, laissez ce champ vide.
@@ -95,12 +95,8 @@
         margin: 17px 0;
     }
 
-    .field-slot {
-        display: contents;
-
-        .field-info {
-            margin: 5px 0;
-            grid-column: span 2;
-        }
+    .field-info {
+        margin: 5px 0;
+        grid-column: span 2;
     }
 </style>
