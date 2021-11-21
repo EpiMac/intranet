@@ -2,6 +2,25 @@ import { sessionCookie } from '$lib/server/session';
 import { login } from '$lib/server/auth';
 
 /**
+ * Microsoft redirection
+ *
+ * @type {import('@sveltejs/kit').RequestHandler}
+ */
+export async function get(request)
+{
+    console.log(JSON.stringify(request, null, 4));
+
+    return {
+        status: '302',
+        headers: {
+            Location: `/auth/microsoft/close`,
+        }
+    };
+}
+
+/**
+ * Apple redirection
+ *
  * @type {import('@sveltejs/kit').RequestHandler}
  */
 export async function post(request)
@@ -13,7 +32,7 @@ export async function post(request)
     return {
         status: '302',
         headers: {
-            Location: `/auth/close`,
+            Location: `/auth/apple/close`,
             'Set-Cookie': sessionCookie(session)
         }
     };

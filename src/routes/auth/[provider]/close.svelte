@@ -4,14 +4,15 @@
     /**
      * @type {import('@sveltejs/kit').Load}
      */
-    export async function load({ session }) {
+    export async function load({ page, session }) {
         const user = getUser(session);
         if (!user) {
             return redirect('/auth/login');
         }
 
+        const { provider } = page.params;
         return {
-            props: { user }
+            props: { user, provider }
         };
     }
 </script>
@@ -20,18 +21,21 @@
     import { onMount } from 'svelte';
 
     export let user;
+    export let provider;
 
     onMount(() =>
     {
         window.opener.postMessage({ user }, window.origin);
         setTimeout(() => window.close(), 500);
     });
+
+    $: email = provider === 'apple' ? user.email : 'Microsoft ?';
 </script>
 
-<div id="close">􀁣 Connecté en tant que <span class="email">{user.email}</span></div>
+<div id="close">􀁣 Connecté en tant que <span class="email">{email}</span></div>
 
 <style lang="scss">
-    @import 'vars';
+    @import "src/styles/vars";
 
     #close {
         flex-grow: 1;

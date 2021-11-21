@@ -10,7 +10,7 @@
             return redirect(user.first_name ? '/' : '/auth/register');
         }
 
-        const { url } = await fetch('/auth/url.json').then(r => r.json());
+        const { url } = await fetch('/auth/apple/url.json').then(r => r.json());
         return {
             props: { url }
         };
@@ -25,7 +25,7 @@
     import { prefetch } from '$app/navigation';
     import { session } from '$app/stores';
 
-    import { title } from '/app';
+    import { openPopup } from '$lib/popup';
 
     import Link from '$components/Link.svelte';
     import Swapper from '$components/Swapper.svelte';
@@ -44,11 +44,7 @@
 
     function handleLogin()
     {
-        const width = Math.min(900, screen.width - 50), height = 800;
-        const x = screen.width / 2 - width / 2, y = screen.height / 2 - height / 2 - 65;
-        const options = `menubar=no, status=no, scrollbars=no, menubar=no, width=${width}, height=${height}, top=${y}, left=${x}`;
-
-        window.open(url, title('Se connecter avec Apple'), options);
+        openPopup(url, 'Se connecter avec Apple');
     }
 
     function handleMessage(msg)
@@ -66,6 +62,8 @@
 
     $: logged = $session.user;
 </script>
+
+<!-- TODO: On popup close (or similar), make the login button appear again -->
 
 <div id="login-page">
     <img id="logo" src={Logo} alt="Logo" />

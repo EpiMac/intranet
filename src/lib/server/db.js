@@ -2,7 +2,7 @@ import postgres from 'postgres';
 
 import { loadConfig } from '$lib/server/config';
 
-const sql = postgres(loadConfig('postgres.json'));
+const sql = postgres(loadConfig('postgres'));
 
 export async function retrieveUser(appleId)
 {

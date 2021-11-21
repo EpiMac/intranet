@@ -10,7 +10,7 @@ let client;
 
 async function init()
 {
-    client = createClient(loadConfig('redis.json'));
+    client = createClient(loadConfig('redis'));
     client.on('error', err => console.error('Redis client error', err));
 
     await client.connect();

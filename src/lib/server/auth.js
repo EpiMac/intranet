@@ -5,7 +5,7 @@ import { loadConfig } from '$lib/server/config';
 import { createSession } from '$lib/server/session';
 import { retrieveUser } from '$lib/server/db';
 
-const auth = new AppleAuth(loadConfig('apple.json'), loadConfig('apple_private_key.p8'), 'text');
+const auth = new AppleAuth(loadConfig('apple'), loadConfig('apple_private_key.p8'), 'text');
 
 export function getLoginURL()
 {

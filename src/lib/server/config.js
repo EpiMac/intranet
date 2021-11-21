@@ -3,7 +3,7 @@ import { mkdirSync, existsSync, readFileSync, writeFileSync } from 'fs';
 
 const CONFIG_FOLDER = process.env.INTRANET_CONFIG_FOLDER || 'config';
 
-export function loadConfig(file)
+export function loadConfig(name)
 {
     if (!existsSync(CONFIG_FOLDER)) {
         console.error(`Can't find config folder '${CONFIG_FOLDER}'.`);
@@ -14,7 +14,7 @@ export function loadConfig(file)
         process.exit(1);
     }
 
-    const path = join(CONFIG_FOLDER, file);
+    const path = join(CONFIG_FOLDER, name + (name.includes('.') ? '' : '.json'));
     if (!existsSync(path)) {
         console.error(`Can't find required config file '${path}'.`);
         console.error('Please fill it and restart the intranet.');

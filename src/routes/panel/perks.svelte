@@ -2,18 +2,31 @@
     /**
      * @type {import('@sveltejs/kit').Load}
      */
-    export async function load({ stuff: { user } }) {
+    export async function load({ fetch, stuff: { user } }) {
+        const { url } = await fetch('/auth/microsoft/url.json').then(r => r.json());
         return {
-            props: { user }
+            props: { user, url }
         };
     }
 </script>
 
 <script>
+    import { openPopup } from '$lib/popup';
+
     import MsLogo from '/assets/microsoft_logo.svg?raw';
 
     export let user;
+    export let url;
+
+    function handleLogin()
+    {
+        openPopup(url, 'Se connecter avec Microsoft');
+    }
 </script>
+
+<!-- TODO: On button click, make it disappear -->
+<!-- TODO: On popup close (or similar), make the login button appear again -->
+<!-- TODO: Generify popup close handling? -->
 
 <div class="header">
     <h1>Aucun compte Microsoft lié</h1>
@@ -28,7 +41,7 @@
         <li>Réduction sur l'abonnement à MacGeneration</li>
         <li>100Go de stockage iCloud</li>
     </ul>
-    <button class="login">
+    <button class="login" on:click={handleLogin}>
         <div class="ms">{@html MsLogo}</div>
         Se connecter via Microsoft
     </button>
