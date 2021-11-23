@@ -35,16 +35,25 @@
 
 
     export let url;
+    let closePopup;
 
     onMount(() =>
     {
         window.addEventListener('message', handleMessage);
-        return () => window.removeEventListener('message', handleMessage);
+
+        return () => {
+            window.removeEventListener('message', handleMessage);
+
+            if (closePopup) {
+                closePopup();
+            }
+        };
     });
 
-    function handleLogin()
+    function handleLogin(toggle)
     {
-        openPopup(url, 'Se connecter avec Apple');
+        toggle();
+        closePopup = openPopup(url, 'Se connecter avec Apple', toggle);
     }
 
     function handleMessage(msg)
@@ -63,8 +72,6 @@
     $: logged = $session.user;
 </script>
 
-<!-- TODO: On popup close (or similar), make the login button appear again -->
-
 <div id="login-page">
     <img id="logo" src={Logo} alt="Logo" />
     <hr id="separator" />
@@ -73,7 +80,7 @@
         <button
                 id="login" class="opaque"
                 slot="A" let:toggle let:outro
-                on:click={() => { toggle(); handleLogin() }}
+                on:click={() => handleLogin(toggle)}
                 transition:fade={{ duration: 150, easing: quadOut }} on:outroend={outro}
         >
             <span class="apple">􀣺</span> Continuer avec Apple
