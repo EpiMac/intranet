@@ -2,9 +2,15 @@
 @import './mixins';
 
 button, a {
-    cursor: pointer;
+    &.unclickable {
+        cursor: default;
+    }
 
-    &:not(.opaque) {
+    &:not(.unclickable) {
+        cursor: pointer;
+    }
+
+    &:not(.opaque):not(.unclickable) {
         @include clickable(opacity, .75, .5);
     }
 }

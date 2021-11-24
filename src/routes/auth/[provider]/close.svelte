@@ -29,7 +29,7 @@
         setTimeout(() => window.close(), 500);
     });
 
-    $: email = provider === 'apple' ? user.email : 'Microsoft ?';
+    $: email = provider === 'apple' ? user.email : user.microsoft_email;
 </script>
 
 <div id="close">􀁣 Connecté en tant que <span class="email">{email}</span></div>

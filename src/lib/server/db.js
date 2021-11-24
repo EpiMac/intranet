@@ -29,9 +29,17 @@ export async function updateUser(appleId, user)
 {
     return sql`
         UPDATE users SET ${
-            sql(user, 'email', 'first_name', 'last_name', 'phone_number')
+            sql(user, 'email', 'first_name', 'last_name', 'phone_number', 'microsoft_email')
         } WHERE apple_id = ${appleId}
 
         RETURNING *
     `;
+}
+
+export async function getUserByMicrosoftEmail(email)
+{
+    return (await sql`
+        SELECT * FROM users
+            WHERE microsoft_email = ${email}
+    `)[0];
 }

@@ -22,7 +22,7 @@
     import { fade } from 'svelte/transition';
     import { quadOut, quadIn } from 'svelte/easing';
 
-    import { prefetch } from '$app/navigation';
+    import { goto } from '$app/navigation';
     import { session } from '$app/stores';
 
     import { openPopup } from '$lib/popup';
@@ -66,7 +66,7 @@
         const next = user.first_name ? '/' : '/auth/register';
 
         session.update(s => ({ ...s, user }));
-        prefetch(next); // This triggers a reload of this page which triggers a redirection, I have no idea why
+        goto(next);
     }
 
     $: logged = $session.user;

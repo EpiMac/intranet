@@ -1,5 +1,9 @@
+import { microsoftLogin } from '$lib/server/ms';
 import { sessionCookie } from '$lib/server/session';
 import { login } from '$lib/server/auth';
+
+// TODO: Manage state
+// TODO: Handle errors
 
 /**
  * Microsoft redirection
@@ -8,7 +12,15 @@ import { login } from '$lib/server/auth';
  */
 export async function get(request)
 {
-    console.log(JSON.stringify(request, null, 4));
+    const params = {};
+    for (const [key, value] of request.query) {
+        params[key] = value;
+    }
+
+    const { session, user } = request.locals;
+    const { code } = params;
+
+    await microsoftLogin(session, user, code);
 
     return {
         status: '302',
