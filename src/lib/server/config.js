@@ -43,9 +43,17 @@ function initConfigFolder()
     writeConfig('postgres.json', {
         database: 'epimac_intranet'
     });
-
+    
+    writeConfig('microsoft.json', {
+        client_id: 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX',
+        client_secret: '',
+        tenant: 'common',
+        redirect_uri: 'https://example.com/auth/microsoft/redirect'
+    });
+    
     writeConfig('redis.json', {});
     writeConfig('apple_private_key.p8', 'INSERT YOUR PRIVATE KEY HERE');
+    writeConfig('ionis_domains.json', ['example.com']);
 }
 
 function writeConfig(name, content)

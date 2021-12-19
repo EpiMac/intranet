@@ -25,7 +25,7 @@ export async function login(code)
 export function getPublicData(user)
 {
     const result = {};
-    const publicFields = ['email', 'first_name', 'last_name', 'phone_number', 'microsoft_email', 'promo'];
+    const publicFields = ['email', 'first_name', 'last_name', 'phone_number', 'microsoft_email', 'promo', 'is_admin'];
 
     for (const field of publicFields) {
         result[field] = user[field];

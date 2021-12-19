@@ -21,6 +21,7 @@ export function getMicrosoftURL()
     });
 }
 
+// TODO: Handle errors properly
 export async function microsoftLogin(session, user, code)
 {
    const { account: { username: email }} = await app.acquireTokenByCode({
@@ -28,14 +29,12 @@ export async function microsoftLogin(session, user, code)
        redirectUri: config.redirect_uri,
        code
    });
-
+   
    if (await getUserByMicrosoftEmail(email)) {
-       // TODO: Handle that properly
        throw 'Account already linked';
    }
 
    if (!domains.some(d => email.match(new RegExp(`.*@|\\.${d}`)))) {
-       // TODO: Handle that properly
        throw 'Not a IONIS e-mail';
    }
 
