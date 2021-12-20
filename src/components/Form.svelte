@@ -92,7 +92,7 @@
         grid-column: span 2;
 
         .submit {
-            background-color: wheat;
+            background-color: white;
             color: black;
 
             font-size: 18px;

@@ -11,8 +11,7 @@
 </script>
 
 <script>
-    import { goto } from '$app/navigation';
-    import { page, session } from '$app/stores';
+    import { session } from '$app/stores';
     import { onMount } from 'svelte';
     import { fade } from 'svelte/transition';
     import { quadOut, quadIn } from 'svelte/easing';
@@ -24,6 +23,7 @@
 
     import MsLogo from '/assets/microsoft_logo.svg?raw';
 
+    // TODO: Fix refresh after linking
 
     export let user;
     export let url;

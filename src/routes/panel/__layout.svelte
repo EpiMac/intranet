@@ -11,6 +11,7 @@
         }
 
         return {
+            props: { admin: user.is_admin },
             stuff: { user, submitted: session && session.submitted }
         };
     }
@@ -22,12 +23,15 @@
 
     import Logo from '/assets/logo.webp';
 
+    export let admin;
+
     const routes = [
         { label: 'Profil', icon: '􀉮', route: '/panel/profile' },
         { label: 'Magasin', icon: '􀍪' },
         { label: 'Avantages', icon: '􀋃', route: '/panel/perks' },
         { label: 'Fichiers', icon: '􀈖' },
-        { label: 'Ouverture du local', icon: '􀎡' }
+        { label: 'Ouverture du local', icon: '􀎡' },
+        ...(admin ? [{ label: 'Liste des membres', icon: '􀋲' , route: '/panel/members' }] : [])
     ];
 
     let loggingOut = false;

@@ -6,5 +6,6 @@ export default {
     '/auth/register': 'S\'inscrire',
     
     '/panel/profile': 'Profil',
-    '/panel/perks': 'Avantages'
+    '/panel/perks': 'Avantages',
+    '/panel/members': 'Liste des membres'
 };
