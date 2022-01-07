@@ -61,7 +61,7 @@
 
         <nav>
             {#each routes as { icon, route, label }}
-                <a class="route card blurred" class:selected={$page.path === route} href={route} sveltekit:prefetch>
+                <a class="route card blurred" class:selected={$page.url.pathname === route} href={route} sveltekit:prefetch>
                     <span class="icon">{icon}</span>
                     {label}
                 </a>

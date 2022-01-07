@@ -6,12 +6,12 @@
      */
     export async function load({ session }) {
         const user = getUser(session);
-        if (!user || user.first_name) {
+        if (user && user.first_name) {
             return redirect(user ? '/' : '/auth/login');
         }
 
         return {
-            props: { user }
+            props: { user: user || {} }
         };
     }
 </script>
@@ -20,14 +20,21 @@
     import { session } from '$app/stores';
 
     import Form from '$components/Form.svelte';
+    import Link from '$components/Link.svelte';
 
     export let user;
 
     let fields = [
         { name: 'first_name', label: 'Prénom', value: user.first_name || '' },
         { name: 'last_name', label: 'Nom de famille', value: user.last_name || '' },
-        { name: 'email', label: 'E-Mail', value: user.email },
+        { name: 'email', label: 'E-Mail', value: user.email || '' },
         { name: 'phone_number', label: 'Numéro de téléphone', value: '' },
+
+        ...(user.email ? [] : [
+            { name: 'password', type: 'password', label: 'Mot de passe', value: '', confirmedBy: 'password_confirm' },
+            { name: 'password_confirm', type: 'password', label: 'Confirmation du mot de passe', value: '', confirms: 'password' }
+        ]),
+
         { name: 'promo', label: 'Promotion', value: '', optional: true }
     ];
 
@@ -39,19 +46,23 @@
     $: logged = $session.user; // TODO: Issue about this being needed
 </script>
 
+<!-- TODO: Cancel/return button -->
+
 <div id="register-container">
     <div id="register" class="card blurred">
         <h1 class="title">S'inscrire</h1>
 
         <p class="info">
-            Ce compte sera associé au compte Apple avec lequel vous vous êtes connecté.
-            L'E-Mail du compte Apple est : <span class="email">{user.email}</span>
+            {#if user.email}
+                Ce compte sera associé au compte Apple avec lequel vous vous êtes connecté.
+                L'E-Mail du compte Apple est : <span class="email">{user.email}</span>
 
-            L'association des comptes utilise les identifiants uniques, votre compte ne sera pas perdu même si l'e-mail
-            change, que vous utilisez le système de relais privé d'Apple ou que vous vous inscrivez avec une adresse
-            différente.
+                L'association des comptes utilise les identifiants uniques, votre compte ne sera pas perdu même si l'e-mail
+                change, que vous utilisez le système de relais privé d'Apple ou que vous vous inscrivez avec une adresse
+                différente.
 
-            Après la création de votre compte, vous pourrez modifier vos informations personnelles à tout moment.
+
+            {/if} Après la création de votre compte, vous pourrez modifier vos informations personnelles à tout moment.
         </p>
 
         <h2 class="subtitle">Informations personnelles</h2>
@@ -64,7 +75,17 @@
                     </p>
                 {/if}
             </div>
+
+            <div slot="submit">
+                {#if !user.email}
+                    <div id="legal">
+                        En cliquant sur "Continuer avec Apple" vous certifiez avoir
+                        pris connaissance des <Link to="https://www.epimac.org/mentions-legales/">mentions légales</Link>
+                    </div>
+                {/if}
+            </div>
         </Form>
+
     </div>
 </div>
 
@@ -98,5 +119,18 @@
     .field-info {
         margin: 5px 0;
         grid-column: span 2;
+    }
+
+    #legal {
+        align-items: center;
+
+        margin-left: 20px;
+
+        font-size: 14px;
+
+        :global(.link) {
+            margin-left: 4px; // TODO: Sad
+            text-decoration: underline;
+        }
     }
 </style>

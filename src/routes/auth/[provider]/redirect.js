@@ -13,7 +13,7 @@ import { login } from '$lib/server/auth';
 export async function get(request)
 {
     const params = {};
-    for (const [key, value] of request.query) {
+    for (const [key, value] of request.url.searchParams) {
         params[key] = value;
     }
 

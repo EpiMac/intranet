@@ -77,18 +77,30 @@
     <hr id="separator" />
 
     <Swapper>
-        <button
-                id="login" class="opaque"
-                slot="A" let:toggle let:outro
-                on:click={() => handleLogin(toggle)}
-                transition:fade={{ duration: 150, easing: quadOut }} on:outroend={outro}
+        <div
+            id="login-buttons"
+            slot="A" let:toggle let:outro
+            transition:fade|local={{ duration: 150, easing: quadOut }} on:outroend={outro}
         >
-            <span class="apple">􀣺</span> Continuer avec Apple
-        </button>
+            <button id="login" class="login-button">
+                Se connecter
+            </button>
+            <a id="register-container" href="/auth/register" sveltekit:prefetch>
+                <button id="register" class="login-button">
+                    S'inscrire
+                </button>
+            </a>
+
+            <div id="or">ou</div>
+
+            <button id="apple-login" class="opaque" on:click={() => handleLogin(toggle)}>
+                <span class="apple">􀣺</span> Continuer avec Apple
+            </button>
+        </div>
         <div
                 id="loading-container"
                 slot="B" let:outro
-                transition:fade={{ duration: 150, easing: quadIn }} on:outroend={outro}
+                transition:fade|local={{ duration: 150, easing: quadIn }} on:outroend={outro}
         >
             <Loading />
         </div>
@@ -128,31 +140,55 @@
         box-shadow: 0 4px 15px rgba(0, 0, 0, .7);
     }
 
-    #login {
-        display: flex;
+    #login-buttons {
+        flex-direction: column;
+        align-items: center;
 
-        padding: 13px 48px;
+        .login-button {
+            width: 100%;
 
-        font-family: $font-sf-text;
-        font-size: 20px;
+            margin-top: 15px;
+            padding: 12px 0;
 
-        background-color: white;
-        color: black;
-
-        border-radius: 4px;
-
-        box-shadow: 0 11px 17px rgba(0, 0, 0, .4);
-
-        .apple {
-            margin-top: -1px;
-            margin-right: 10px;
+            font-size: 16px;
         }
 
-        @include clickable(background-color, #ddd, #bbb);
+        #register-container {
+            width: 100%;
+        }
+
+        #or {
+            margin: 15px 0;
+        }
+
+        #apple-login {
+            display: flex;
+
+            padding: 13px 48px;
+
+            font-family: $font-sf-text;
+            font-size: 20px;
+
+            background-color: white;
+            color: black;
+
+            border-radius: 4px;
+
+            box-shadow: 0 11px 17px rgba(0, 0, 0, .4);
+
+            .apple {
+                margin-top: -1px;
+                margin-right: 10px;
+            }
+
+            @include clickable(background-color, #ddd, #bbb);
+        }
     }
 
     #loading-container {
-        height: 51px;
+        height: 219px;
+
+        align-items: center;
     }
 
     #terms {

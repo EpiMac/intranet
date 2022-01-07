@@ -4,13 +4,12 @@
     /**
      * @type {import('@sveltejs/kit').Load}
      */
-    export async function load({ page, session }) {
+    export async function load({ params: { provider }, session }) {
         const user = getUser(session);
         if (!user) {
             return redirect('/auth/login');
         }
 
-        const { provider } = page.params;
         return {
             props: { user, provider }
         };

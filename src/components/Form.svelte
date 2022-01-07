@@ -51,7 +51,13 @@
                     <span class="star">*</span>
                 {/if}
             </div>
-            <input class="input" bind:value={field.value} readonly={submitting} />
+
+            <!-- Type can't be dynamic if input uses two-way binding -->
+            {#if field.type === 'password'}
+                <input class="input" type="password" bind:value={field.value} readonly={submitting} />
+            {:else}
+                <input class="input" bind:value={field.value} readonly={submitting} />
+            {/if}
         </div>
     {/each}
 

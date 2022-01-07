@@ -11,11 +11,11 @@
 </script>
 
 <script>
-    import { session } from '$app/stores';
     import { onMount } from 'svelte';
     import { fade } from 'svelte/transition';
     import { quadOut, quadIn } from 'svelte/easing';
 
+    import { session } from '$app/stores';
     import { openPopup } from '$lib/popup';
 
     import Loading from '$components/Loading.svelte';
@@ -96,7 +96,7 @@
                         class="login-content"
                         slot="A" let:toggle let:outro
                         on:click={() => handleLogin(toggle)}
-                        transition:fade={{ duration: 150, easing: quadOut }} on:outroend={outro}
+                        transition:fade|local={{ duration: 150, easing: quadOut }} on:outroend={outro}
                 >
                     <div class="ms">{@html MsLogo}</div>
                     Se connecter via Microsoft
@@ -104,7 +104,7 @@
                 <div
                         class="login-content"
                         slot="B" let:outro
-                        transition:fade={{ duration: 150, easing: quadIn }} on:outroend={outro}
+                        transition:fade|local={{ duration: 150, easing: quadIn }} on:outroend={outro}
                 >
                     <Loading />
                 </div>

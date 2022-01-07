@@ -21,8 +21,8 @@
         return () => clearInterval(interval);
     });
 
-    $: pageTitle = titles[$page.path];
-    $: bg = $page.path.startsWith('/panel/') ? 'bg-color' : 'bg-base';
+    $: pageTitle = titles[$page.url.pathname];
+    $: bg = $page.url.pathname.startsWith('/panel/') ? 'bg-color' : 'bg-base';
     $: date = time.toLocaleDateString('fr', {
         weekday: 'short', day: 'numeric', month: 'short',
         hour: 'numeric', minute: 'numeric', second: 'numeric'

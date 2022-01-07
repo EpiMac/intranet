@@ -1,4 +1,5 @@
 import postgres from 'postgres';
+import { hash, argon2id } from 'argon2';
 
 import { loadConfig } from '$lib/server/config';
 
@@ -15,10 +16,16 @@ export async function retrieveUser(appleId)
 export async function createUser(user)
 {
     const extra = user.promo ? ['promo'] : [];
+    if (user.password) {
+        user.password = await hash(user.password, { type: argon2id });
+        extra.push('password');
+    } else {
+        extra.push('apple_id');
+    }
 
     return sql`
         INSERT INTO users ${
-            sql(user, 'email', 'first_name', 'last_name', 'phone_number', 'apple_id', ...extra)
+            sql(user, 'email', 'first_name', 'last_name', 'phone_number', ...extra)
         }
         
         RETURNING *
