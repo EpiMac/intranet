@@ -7,7 +7,7 @@
     export async function load({ params: { provider }, session }) {
         const user = getUser(session);
         if (!user) {
-            return redirect('/auth/login');
+            return redirect('/');
         }
 
         return {

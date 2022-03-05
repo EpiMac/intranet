@@ -29,7 +29,7 @@ export async function microsoftLogin(session, user, code)
        redirectUri: config.redirect_uri,
        code
    });
-   
+
    if (await getUserByMicrosoftEmail(email)) {
        throw 'Account already linked';
    }
@@ -40,6 +40,6 @@ export async function microsoftLogin(session, user, code)
 
    user.microsoft_email = email;
 
-   await updateUser(user.apple_id, user);
+   await updateUser(user.id, user, ['microsoft_email']);
    await updateSession(session, user);
 }

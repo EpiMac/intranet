@@ -1,6 +1,6 @@
 import { microsoftLogin } from '$lib/server/ms';
 import { sessionCookie } from '$lib/server/session';
-import { login } from '$lib/server/auth';
+import { loginWithApple } from '$lib/server/auth';
 
 // TODO: Manage state
 // TODO: Handle errors
@@ -20,6 +20,10 @@ export async function get(request)
     const { session, user } = request.locals;
     const { code } = params;
 
+    if (!session || !user || !code) {
+       throw 'Invalid parameters';
+    }
+
     await microsoftLogin(session, user, code);
 
     return {
@@ -38,7 +42,12 @@ export async function get(request)
 export async function post(request)
 {
     // TODO: Manage state
-    const { session } = await login(request.body.get('code'));
+    const code = request.body.get('code');
+    if (!code) {
+        throw 'Invalid parameters';
+    }
+
+    const { session } = await loginWithApple(code);
 
     // TODO: Session expiration management
     return {

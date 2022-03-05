@@ -11,9 +11,13 @@ export async function post(req)
     if (!session || !user) {
         throw 'You must be logged in';
     }
+    if (user.promo) {
+        throw 'Promotion already defined';
+    }
 
+    user.promo = req.body.promo;
     try {
-        user = await updateUser(user.id, req.body);
+        user = await updateUser(user.id, user, ['promo']);
     } catch (e) {
         console.error(e);
         return { status: 401, body: { error: e.toString() }};

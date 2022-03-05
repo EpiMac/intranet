@@ -1,12 +1,17 @@
 <script>
-    // TODO: Better validation
     import { createEventDispatcher } from 'svelte';
+
+    import { displayError } from '$lib/error.js';
+
+    // TODO: Better validation
 
     const dispatch = createEventDispatcher();
 
     export let label;
     export let endpoint;
     export let fields;
+    export let autofocus = true;
+    export let extraData = {};
 
     let submitting = false;
 
@@ -18,11 +23,18 @@
 
         submitting = true;
 
-        const data = {};
+        const data = { ...extraData };
         for (const { name, value } of fields) {
             if (value.trim() !== '') {
                 data[name] = value;
             }
+        }
+
+        dispatch('post', data);
+
+        if (!endpoint) {
+            submitting = false;
+            return;
         }
 
         fetch(endpoint, {
@@ -32,19 +44,31 @@
             },
             body: JSON.stringify(data)
         }).then(r => r.json()).then(result => {
-            dispatch('posted', result);
+            const { error } = result;
+            if (error) {
+                console.error(error);
+                displayError(error);
+            } else {
+                dispatch('posted', result);
+            }
+
             submitting = false;
-        }).catch(err => console.error(err));
+        }).catch(err => {
+            console.error(err);
+            displayError(err.toString());
+
+            submitting = false;
+        });
     }
 
     $: canSubmit = fields.filter(({ value, optional }) => !optional && value.trim() === '').length === 0;
 </script>
 
 <form class="form" on:submit|preventDefault={submit}>
-    {#each fields as field}
+    {#each fields as field, i}
         <slot name="field" {field} />
 
-        <div class="field-group">
+        <div class="field-group" class:long={field.long}>
             <div class="label">
                 {field.label}
                 {#if !field.optional}
@@ -56,7 +80,7 @@
             {#if field.type === 'password'}
                 <input class="input" type="password" bind:value={field.value} readonly={submitting} />
             {:else}
-                <input class="input" bind:value={field.value} readonly={submitting} />
+                <input class="input" bind:value={field.value} placeholder={field.placeholder} readonly={submitting} autofocus={autofocus && i === 0} />
             {/if}
         </div>
     {/each}
@@ -90,6 +114,10 @@
 
                 color: #e03721;
             }
+        }
+
+        &.long {
+            grid-column: span 2;
         }
     }
 

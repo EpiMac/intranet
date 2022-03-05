@@ -36,6 +36,7 @@ export async function retrieveSession(id)
 export async function updateSession(id, user)
 {
     await client.set(id, JSON.stringify(user));
+    return id;
 }
 
 export async function removeSession(id)

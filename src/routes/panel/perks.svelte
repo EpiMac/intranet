@@ -5,7 +5,7 @@
     export async function load({ fetch, stuff: { user } }) {
         const { url } = await fetch('/auth/microsoft/url.json').then(r => r.json());
         return {
-            props: { user, url }
+            props: { givenUser: user, url }
         };
     }
 </script>
@@ -18,18 +18,21 @@
     import { session } from '$app/stores';
     import { openPopup } from '$lib/popup';
 
+    import Form from '$components/Form.svelte';
     import Loading from '$components/Loading.svelte';
     import Swapper from '$components/Swapper.svelte';
 
     import MsLogo from '/assets/microsoft_logo.svg?raw';
 
-    // TODO: Fix refresh after linking
-
-    export let user;
+    export let givenUser;
     export let url;
 
     let loggingIn;
     let closePopup;
+
+    const promoFields = [
+        { name: 'promo', label: 'Promotion', value: '' }
+    ];
 
     onMount(() =>
     {
@@ -57,15 +60,19 @@
 
     function handleMessage(msg)
     {
-        if (msg.origin !== window.origin || !msg.data.user) {
+        if (!msg.detail && (msg.origin !== window.origin || !msg.data.user)) {
             return;
         }
 
-        const { user } = msg.data;
+        const { user } = msg.detail || msg.data;
+
+        // This will trigger a soft-reload of the page sometimes
         session.update(s => ({ ...s, user }));
     }
 
+    $: user = $session.user || givenUser;
     $: email = user.microsoft_email;
+    $: promo = user.promo;
 </script>
 
 <div class="header">
@@ -75,20 +82,24 @@
 <div class="perks card">
     <h1>Avantages</h1>
 
-    {#if email}
+    {#if email && promo}
         En tant qu'étudiant dans une école du groupe IONIS, vous pouvez profiter des avantages suivants :
+    {:else if email}
+        Renseignez votre promotion pour pouvoir profiter des avantages suivants :
     {:else}
         Vous êtes étudiant dans une école du groupe IONIS ? Liez votre compte Microsoft scolaire pour obtenir des avantages exclusifs !
     {/if}
 
     <ul>
         <li>Accès au programme développeur Apple (permet de publier des applications sur l'App Store)</li>
-        <li>Réduction sur l'abonnement à MacGeneration</li>
+        <li>Réduction sur l'abonnement à iGeneration</li>
         <li>100Go de stockage iCloud</li>
     </ul>
 
-    {#if email}
+    {#if email && promo}
         Pour plus d'informations, rendez-vous sur le Discord de l'association
+    {:else if email}
+        <Form label="Envoyer" endpoint="/panel/set-promotion.json" fields={promoFields} on:posted={handleMessage} />
     {:else}
         <button class="login" class:unclickable={loggingIn}>
             <Swapper>
@@ -113,6 +124,16 @@
     {/if}
 </div>
 
+{#if email && promo}
+    <div class="igen card">
+        <h1>Club iGen</h1>
+
+        Rejoignez le club iGen pour seulement X au lieu de 4,99€ par mois !
+
+        <button class="do-it">Profiter</button>
+    </div>
+{/if}
+
 <style lang="scss">
     .header {
         justify-content: center;
@@ -121,16 +142,22 @@
         height: 300px;
     }
 
-    .perks {
+    .card {
         flex-direction: column;
         align-items: flex-start;
 
         h1 {
             margin-bottom: 25px;
         }
+    }
 
+    .perks {
         li {
             margin-bottom: 5px;
+        }
+
+        :global(.form) {
+            margin-top: 10px;
         }
     }
 
@@ -160,5 +187,20 @@
 
     :global(.loading) {
         transform: scale(0.35) translateY(2px);
+    }
+
+    .igen {
+        margin-top: 25px;
+
+        flex-direction: column;
+        align-items: flex-start;
+
+        h1 {
+            margin-bottom: 25px;
+        }
+
+        .do-it {
+            margin-top: 25px;
+        }
     }
 </style>

@@ -4,6 +4,7 @@
     import { title } from '/app';
     import { page } from '$app/stores';
     import titles from '$lib/titles';
+    import { error, errorDisplayed } from '$lib/error';
 
     import Link from '$components/Link.svelte';
 
@@ -11,9 +12,8 @@
 
     let time = new Date();
     const links = [
-        { label: 'Retour à l\'accueil', url: 'https://www.epimac.org/', external: false },
-        { label: 'Mentions légales', url: 'https://www.epimac.org/mentions-legales/' },
-        { label: 'À Propos' } // TODO: Proper about page
+        { label: 'Retour au site', url: 'https://www.epimac.org/', external: false },
+        { label: 'Mentions légales', url: 'https://www.epimac.org/mentions-legales/' }
     ];
 
     onMount(() => {
@@ -46,6 +46,11 @@
     </div>
 
     <slot />
+
+    <div id="error" class:displayed={$errorDisplayed}>
+        <h1>Erreur</h1>
+        <p class="description">{$error}</p>
+    </div>
 </main>
 
 <style lang="scss">
@@ -59,6 +64,8 @@
 
         background-color: black;
         background-size: cover;
+
+        overflow: auto;
 
         &.bg-base {
             background-image: url('../assets/base-background.webp');
@@ -100,11 +107,36 @@
         }
 
         #date {
-            width: 170px;
+            width: 175px;
 
             &:first-letter {
                 text-transform: capitalize;
             }
+        }
+    }
+
+    #error {
+        position: absolute;
+        bottom: 0;
+
+        flex-direction: column;
+
+        width: 100%;
+
+        padding: 15px 25px;
+
+        background-color: rgb(224, 12, 12);
+
+        transform: translateY(100px);
+        transition: transform .2s;
+
+        h1 {
+            margin-bottom: 5px;
+            font-size: 26px;
+        }
+
+        &.displayed {
+            transform: translateY(0);
         }
     }
 

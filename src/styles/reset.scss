@@ -1,5 +1,9 @@
 @import '/node_modules/normalizecss/normalize.css';
 
+html {
+    overflow: hidden; // To hide the error block
+}
+
 body {
     overflow-x: hidden;
 }

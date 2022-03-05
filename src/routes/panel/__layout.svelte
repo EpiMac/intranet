@@ -7,7 +7,7 @@
     export async function load({ session }) {
         const user = getUser(session);
         if (!user || !user.first_name) {
-            return redirect('/auth/login');
+            return redirect(user ? '/auth/register' : '/auth/login');
         }
 
         return {
@@ -20,6 +20,7 @@
 <script>
     import { goto } from '$app/navigation';
     import { session, page } from '$app/stores';
+    import { displayError } from '$lib/error';
 
     import Logo from '/assets/logo.webp';
 
@@ -27,10 +28,10 @@
 
     const routes = [
         { label: 'Profil', icon: '􀉮', route: '/panel/profile' },
-        { label: 'Magasin', icon: '􀍪' },
+        // { label: 'Magasin', icon: '􀍪' },
         { label: 'Avantages', icon: '􀋃', route: '/panel/perks' },
-        { label: 'Fichiers', icon: '􀈖' },
-        { label: 'Ouverture du local', icon: '􀎡' },
+        { label: 'Fichiers', icon: '􀈖', route: '/panel/files' },
+        // { label: 'Ouverture du local', icon: '􀎡' },
         ...(admin ? [{ label: 'Liste des membres', icon: '􀋲' , route: '/panel/members' }] : [])
     ];
 
@@ -47,9 +48,12 @@
         fetch('/auth/logout.json', { method: 'POST' })
             .then(() => {
                 session.update(s => ({ ...s, user: null }));
-                goto('/auth/login');
+                goto('/');
             })
-            .catch(err => console.error(err));
+            .catch(err => {
+                console.error(err);
+                displayError(err);
+            });
     }
 
     $: s = $session;
@@ -93,6 +97,8 @@
 
         .logo {
             max-width: 100%;
+
+            object-fit: scale-down;
 
             margin-top: 50px;
             padding: 0 40px;

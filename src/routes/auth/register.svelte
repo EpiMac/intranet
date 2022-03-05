@@ -7,11 +7,11 @@
     export async function load({ session }) {
         const user = getUser(session);
         if (user && user.first_name) {
-            return redirect(user ? '/' : '/auth/login');
+            return redirect('/panel');
         }
 
         return {
-            props: { user: user || {} }
+            props: { givenUser: user || {} }
         };
     }
 </script>
@@ -22,9 +22,16 @@
     import Form from '$components/Form.svelte';
     import Link from '$components/Link.svelte';
 
-    export let user;
+    export let givenUser;
 
-    let fields = [
+    function handleRegistration({ detail: { user }})
+    {
+        // This will trigger a soft-reload of the page sometimes
+        session.update(s => ({ ...s, user }));
+    }
+
+    $: user = $session.user || givenUser;
+    $: fields = [
         { name: 'first_name', label: 'Prénom', value: user.first_name || '' },
         { name: 'last_name', label: 'Nom de famille', value: user.last_name || '' },
         { name: 'email', label: 'E-Mail', value: user.email || '' },
@@ -37,23 +44,17 @@
 
         { name: 'promo', label: 'Promotion', value: '', optional: true }
     ];
-
-    function handleRegistration({ detail: { user }})
-    {
-        session.update(s => ({ ...s, user }));
-    }
-
-    $: logged = $session.user; // TODO: Issue about this being needed
+    $: withApple = !!user.email;
 </script>
 
-<!-- TODO: Cancel/return button -->
+<!-- TODO: Cancel button (with Apple) -->
 
 <div id="register-container">
     <div id="register" class="card blurred">
         <h1 class="title">S'inscrire</h1>
 
         <p class="info">
-            {#if user.email}
+            {#if withApple}
                 Ce compte sera associé au compte Apple avec lequel vous vous êtes connecté.
                 L'E-Mail du compte Apple est : <span class="email">{user.email}</span>
 
@@ -77,16 +78,19 @@
             </div>
 
             <div slot="submit">
-                {#if !user.email}
+                {#if !withApple}
                     <div id="legal">
-                        En cliquant sur "Continuer avec Apple" vous certifiez avoir
+                        En cliquant sur "S'inscrire" vous certifiez avoir
                         pris connaissance des <Link to="https://www.epimac.org/mentions-legales/">mentions légales</Link>
                     </div>
                 {/if}
             </div>
         </Form>
-
     </div>
+
+    {#if !withApple}
+        <a id="back" href="/" sveltekit:prefetch>􀆉 Retour</a>
+    {/if}
 </div>
 
 <style lang="scss">
@@ -94,6 +98,7 @@
 
     #register-container {
         flex-grow: 1;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
     }
@@ -132,5 +137,11 @@
             margin-left: 4px; // TODO: Sad
             text-decoration: underline;
         }
+    }
+
+    #back {
+        margin-top: 25px;
+
+        font-size: 22px;
     }
 </style>

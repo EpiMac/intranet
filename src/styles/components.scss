@@ -1,7 +1,7 @@
 @import './vars';
 @import './mixins';
 
-button, a {
+button, a, .clickable {
     &.unclickable {
         cursor: default;
     }
@@ -65,7 +65,10 @@ button {
 }
 
 .blurred {
-    backdrop-filter: blur(50px) saturate(125%);
+    $blur: blur(50px) saturate(125%);
+
+    backdrop-filter: $blur;
+    -webkit-backdrop-filter: $blur;
     text-shadow: 0 1px 1px rgba(0, 0, 0, .1), 0 1px 4px rgba(0, 0, 0, .2);
 }
 

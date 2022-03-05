@@ -5,7 +5,9 @@ import { sessionCookie, removeSession } from '$lib/server/session';
  */
 export async function post(req)
 {
-    await removeSession(req.locals.session);
+    if (req.locals.session) {
+        await removeSession(req.locals.session);
+    }
 
     return {
         body: {},
