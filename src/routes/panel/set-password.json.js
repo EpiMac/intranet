@@ -1,7 +1,10 @@
+import argon2 from 'argon2';
+
 import { getPublicData } from '$lib/server/auth';
-import { getUserByEmail, updateUser } from '$lib/server/db';
+import { updateUser } from '$lib/server/db';
 import { updateSession } from '$lib/server/session';
-import { argon2id, hash, verify } from 'argon2';
+
+const { argon2id, hash, verify } = argon2;
 
 /**
  * @type {import('@sveltejs/kit').RequestHandler}

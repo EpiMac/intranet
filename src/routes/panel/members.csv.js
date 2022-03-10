@@ -1,7 +1,7 @@
 /**
  * @type {import('@sveltejs/kit').RequestHandler}
  */
-import { getAllUsers } from '$lib/server/db.js';
+import { getAllUsers } from '$lib/server/db';
 
 export async function get(req)
 {

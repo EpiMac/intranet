@@ -1,10 +1,12 @@
 import AppleAuth from 'apple-auth';
 import { decode } from 'jsonwebtoken';
-import { verify } from 'argon2';
+import argon2 from 'argon2';
 
 import { loadConfig } from '$lib/server/config';
 import { createSession } from '$lib/server/session';
 import { getUserByEmail, getUserByAppleId } from '$lib/server/db';
+
+const { verify } = argon2;
 
 const auth = new AppleAuth(loadConfig('apple'), loadConfig('apple_private_key.p8'), 'text');
 

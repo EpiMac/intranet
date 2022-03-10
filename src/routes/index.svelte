@@ -1,5 +1,5 @@
 <script context="module">
-    import { getUser, redirect } from '$lib/middleware.js';
+    import { getUser, redirect } from '$lib/middleware';
 
     /**
      * @type {import('@sveltejs/kit').Load}
@@ -22,10 +22,10 @@
     import { fade } from 'svelte/transition';
     import { quadOut, quadIn } from 'svelte/easing';
 
-    import { goto } from '$app/navigation.js';
-    import { session } from '$app/stores.js';
+    import { goto } from '$app/navigation';
+    import { session } from '$app/stores';
 
-    import { openPopup } from '$lib/popup.js';
+    import { openPopup } from '$lib/popup';
 
     import Link from '$components/Link.svelte';
     import Swapper from '$components/Swapper.svelte';

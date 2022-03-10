@@ -1,7 +1,9 @@
 import postgres from 'postgres';
-import { hash, argon2id } from 'argon2';
+import argon2 from 'argon2';
 
 import { loadConfig } from '$lib/server/config';
+
+const { hash, argon2id } = argon2;
 
 const config = loadConfig('postgres');
 const sql = postgres(config);

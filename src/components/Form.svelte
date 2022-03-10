@@ -1,7 +1,7 @@
 <script>
     import { createEventDispatcher } from 'svelte';
 
-    import { displayError } from '$lib/error.js';
+    import { displayError } from '$lib/error';
 
     // TODO: Better validation
 

@@ -1,5 +1,5 @@
-import { loadConfig } from '$lib/server/config.js';
-import { getUserByEmail } from '$lib/server/db';
+import { loadConfig } from '$lib/server/config';
+import { getUserByEmail, getUserByMicrosoftEmail } from '$lib/server/db';
 
 const apiKey = loadConfig('igen');
 
@@ -13,7 +13,10 @@ export async function post(req)
         throw 'Bad API key';
     }
 
-    const user = await getUserByEmail(email);
+    let user = await getUserByEmail(email);
+    if (!user) {
+        user = await getUserByMicrosoftEmail(email);
+    }
     return {
         body: {
             is_student: (user && user.microsoft_email && user.promo && user.promo >= new Date().getFullYear()) || false,
