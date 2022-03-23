@@ -12,12 +12,34 @@ const drive = google.drive({
     })
 });
 
+const cache = {};
+
 export async function listDocuments()
 {
+    return;
+    /*await drive.permissions.create({
+        fileId: '1TYYeUYHcSsmUoFU1lNzUnSOTCdii0vMj',
+        requestBody: {
+            role: 'reader',
+            type: 'anyone'
+        }
+    });*/
+
     const result = await drive.files.list({
-        fields: 'nextPageToken, files(id, name)',
+        q: 'mimeType != \'application/vnd.google-apps.folder\'',
+        fields: 'nextPageToken, files(id, name, webContentLink)',
         spaces: 'drive'
     });
 
+    const permissions = await drive.permissions.list({
+        fileId: '1TYYeUYHcSsmUoFU1lNzUnSOTCdii0vMj',
+    })
+
     console.log(result.data.files);
+    console.log(permissions.data.permissions);
+}
+
+export async function download(document)
+{
+
 }
