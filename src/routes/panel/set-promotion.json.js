@@ -15,7 +15,7 @@ export async function post(req)
         throw 'Promotion already defined';
     }
 
-    user.promo = req.body.promo;
+    user.promo = (await req.request.json()).promo;
     try {
         user = await updateUser(user.id, user, ['promo']);
     } catch (e) {

@@ -10,7 +10,7 @@ export async function post(req)
         throw 'You must be admin';
     }
 
-    const user = req.body;
+    const user = await req.request.json();
     let result;
     try {
         const extra = [];

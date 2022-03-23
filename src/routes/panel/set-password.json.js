@@ -16,7 +16,7 @@ export async function post(req)
         throw 'You must be logged in';
     }
 
-    const { old_password, password } = req.body;
+    const { old_password, password } = await req.request.json();
     if (!old_password || !password) {
         throw 'Invalid parameters';
     }

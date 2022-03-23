@@ -51,6 +51,10 @@ function initConfigFolder()
         redirect_uri: 'https://example.com/auth/microsoft/redirect'
     });
 
+    writeConfig('drive.json', {
+        key: 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
+    });
+
     writeConfig('redis.json', {});
     writeConfig('apple_private_key.p8', 'INSERT YOUR PRIVATE KEY HERE');
     writeConfig('ionis_domains.json', ['example.com']);

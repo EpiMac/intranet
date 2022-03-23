@@ -13,7 +13,7 @@ export async function post(req)
     }
 
     try {
-        user = await updateUser(user.id, req.body);
+        user = await updateUser(user.id, await req.request.json());
     } catch (e) {
         console.error(e);
         return { status: 401, body: { error: e.toString() }};

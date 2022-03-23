@@ -6,7 +6,7 @@ import { sessionCookie } from '$lib/server/session';
  */
 export async function post(req)
 {
-    const { email, password } = { ...req.body };
+    const { email, password } = await req.request.json();
     if (!email || !password) {
         return { status: 401, body: { error: 'Both email and password must be provided' }};
     }

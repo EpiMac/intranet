@@ -42,7 +42,7 @@ export async function get(request)
 export async function post(request)
 {
     // TODO: Manage state
-    const code = request.body.get('code');
+    const code = (await request.request.formData()).get('code');
     if (!code) {
         throw 'Invalid parameters';
     }

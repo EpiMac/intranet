@@ -8,7 +8,7 @@ const apiKey = loadConfig('igen');
  */
 export async function post(req)
 {
-    const { key, email } = req.body;
+    const { key, email } = await req.request.json();
     if (key !== apiKey) {
         throw 'Bad API key';
     }

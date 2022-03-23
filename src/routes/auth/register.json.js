@@ -10,7 +10,7 @@ export async function post(req)
     const { apple_id } = req.locals.user || {};
     let user;
     try {
-        [user] = await createUser({ apple_id, ...req.body });
+        [user] = await createUser({ apple_id, ...(await req.request.json()) });
     } catch (e) {
         console.error(e);
         return { status: 401, body: { error: e.toString() }};
