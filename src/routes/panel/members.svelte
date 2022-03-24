@@ -99,7 +99,7 @@
                         {label}
                         <span class="sorting">
                             {#if sort.field === name}
-                                {#if sort.order === 'ascending'}􀄩{:else}􀄨{/if}
+                                {#if sort.order === 'ascending'}↓{:else}↑{/if}
                             {/if}
                         </span>
                     </th>

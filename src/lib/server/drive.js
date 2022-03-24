@@ -1,7 +1,9 @@
 import { GoogleAuth } from 'google-auth-library';
 import { google } from 'googleapis';
 
-import { loadConfig } from '$lib/server/config.js';
+import { loadConfig } from '$lib/server/config';
+
+const CACHE_LIFETIME = 10000; // Ten seconds
 
 const config = loadConfig('drive');
 const drive = google.drive({
@@ -12,34 +14,50 @@ const drive = google.drive({
     })
 });
 
-const cache = {};
+const cache = {
+    list: { time: 0 },
+    download: {}
+};
 
 export async function listDocuments()
 {
-    return;
-    /*await drive.permissions.create({
-        fileId: '1TYYeUYHcSsmUoFU1lNzUnSOTCdii0vMj',
-        requestBody: {
-            role: 'reader',
-            type: 'anyone'
-        }
-    });*/
+    if (new Date() - cache.list.time < CACHE_LIFETIME) {
+        return cache.list.files;
+    }
 
-    const result = await drive.files.list({
+    const { data: { files } } = await drive.files.list({
         q: 'mimeType != \'application/vnd.google-apps.folder\'',
         fields: 'nextPageToken, files(id, name, webContentLink)',
         spaces: 'drive'
     });
 
-    const permissions = await drive.permissions.list({
-        fileId: '1TYYeUYHcSsmUoFU1lNzUnSOTCdii0vMj',
-    })
+    cache.list = { files, time: new Date() };
 
-    console.log(result.data.files);
-    console.log(permissions.data.permissions);
+    return files;
 }
 
-export async function download(document)
+export async function getDocumentLink(id)
 {
+    if (!cache.download[id]) {
+        const { data: { permissions } } = await drive.permissions.list({ fileId: id });
+        if (!permissions.find(p => p.type === 'anyone' && p.type === 'reader')) {
+            await drive.permissions.create({
+                fileId: id,
+                requestBody: {
+                    role: 'reader',
+                    type: 'anyone'
+                }
+            });
+        }
 
+        cache.download[id] = true;
+    }
+
+    const files = cache.list.files || await listDocuments();
+    const file = files.find(f => f.id === id);
+    if (!file) {
+        throw 'Unknown file';
+    }
+
+    return file.webContentLink;
 }

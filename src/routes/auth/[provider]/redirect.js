@@ -27,7 +27,7 @@ export async function get(request)
     await microsoftLogin(session, user, code);
 
     return {
-        status: '302',
+        status: 302,
         headers: {
             Location: `/auth/microsoft/close`,
         }
@@ -51,7 +51,7 @@ export async function post(request)
 
     // TODO: Session expiration management
     return {
-        status: '302',
+        status: 302,
         headers: {
             Location: `/auth/apple/close`,
             'Set-Cookie': sessionCookie(session)

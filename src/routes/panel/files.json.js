@@ -1,13 +1,19 @@
+import { listDocuments } from '$lib/server/drive.js';
+
 /**
  * @type {import('@sveltejs/kit').RequestHandler}
  */
-import { listDocuments } from '$lib/server/drive.js';
-
-export async function get(req)
+export async function get()
 {
-    const documents = await listDocuments();
+    let files;
+    try {
+        files = await listDocuments();
+    } catch (e) {
+        console.error(e);
+        return { status: 401, body: { error: e.toString() } };
+    }
 
     return {
-        body: {}
+        body: files.map(({ id, name }) => ({ id, name }))
     }
 }
