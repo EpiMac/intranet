@@ -1,10 +1,15 @@
 import { join } from 'path';
 import { mkdirSync, existsSync, readFileSync, writeFileSync } from 'fs';
 
+
 const CONFIG_FOLDER = process.env.INTRANET_CONFIG_FOLDER || 'config';
 
 export function loadConfig(name)
 {
+    if (process.env.npm_lifecycle_script === 'svelte-kit build') {
+        return {};
+    }
+
     if (!existsSync(CONFIG_FOLDER)) {
         console.error(`Can't find config folder '${CONFIG_FOLDER}'.`);
         console.error('Folder was created with default config files, please fill them and restart the intranet.');
