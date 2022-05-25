@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  redis:
+    image: redis:6.2-alpine
+    restart: always
+  postgres:
+    image: postgres:13.7-alpine
+    restart: always
+    env_file:
+      - postgres.env
+    volumes:
+      - ./db:/var/lib/postgresql/data
+  intranet:
+    build: .
+    restart: always
+    volumes:
+      - ./config:/var/run/intranet/config
+    ports:
+      - "127.0.0.1:3000:3000"

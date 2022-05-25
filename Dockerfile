@@ -5,7 +5,7 @@ LABEL maintainer="Adrien Navratil <adrien1975@live.fr>"
 ENV BUILD_ROOT /tmp/intranet-build
 
 RUN mkdir -p $BUILD_ROOT
-WORKDIR ${BUILD_ROOT}
+WORKDIR $BUILD_ROOT
 
 COPY src ./src
 COPY static ./static
@@ -31,9 +31,8 @@ RUN mkdir -p ${INTRANET_ROOT} && \
 USER $USER
 WORKDIR $INTRANET_ROOT
 
-COPY --from=builder ${BUILD_ROOT}/build ./build
 COPY --from=builder ${BUILD_ROOT}/node_modules ./node_modules
-COPY --from=builder ${BUILD_ROOT}/package.json ./
+COPY --from=builder ${BUILD_ROOT}/build ${BUILD_ROOT}/package.json ./
 
 EXPOSE 3000
 CMD ["node", "index.js"]
