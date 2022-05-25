@@ -17,9 +17,12 @@ export async function post(req)
     if (!user) {
         user = await getUserByMicrosoftEmail(email);
     }
+
+    const result = user && user.microsoft_email && user.promo && user.promo >= new Date().getFullYear();
     return {
         body: {
-            is_student: (user && user.microsoft_email && user.promo && user.promo >= new Date().getFullYear()) || false,
+            is_student: result || false,
+            ...(result ? { promo: user.promo } : {})
         }
     };
 }
