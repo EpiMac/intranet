@@ -79,6 +79,8 @@
             <!-- Type can't be dynamic if input uses two-way binding -->
             {#if field.type === 'password'}
                 <input class="input" type="password" bind:value={field.value} readonly={submitting} />
+            {:else if field.type === 'textarea'}
+                <textarea class="input wide" bind:value={field.value} readonly={submitting}></textarea>
             {:else}
                 <input class="input" bind:value={field.value} placeholder={field.placeholder} readonly={submitting} autofocus={autofocus && i === 0} />
             {/if}
@@ -114,6 +116,10 @@
 
                 color: #e03721;
             }
+        }
+
+        .wide {
+            min-height: 225px;
         }
 
         &.long {

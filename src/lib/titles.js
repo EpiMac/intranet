@@ -8,5 +8,6 @@ export default {
     '/panel/profile': 'Profil',
     '/panel/perks': 'Avantages',
     '/panel/files': 'Fichiers',
-    '/panel/members': 'Liste des membres'
+    '/panel/members': 'Liste des membres',
+    '/panel/submit-dev': 'Apple Developer'
 };

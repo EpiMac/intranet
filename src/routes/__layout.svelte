@@ -13,7 +13,8 @@
     let time = new Date();
     const links = [
         { label: 'Retour au site', url: 'https://www.epimac.org/', external: false },
-        { label: 'Mentions légales', url: 'https://www.epimac.org/mentions-legales/' }
+        { label: 'Mentions légales', url: 'https://www.epimac.org/mentions-legales/' },
+        { label: 'Discord', url: 'https://discord.com/invite/KtGBhWt' }
     ];
 
     onMount(() => {

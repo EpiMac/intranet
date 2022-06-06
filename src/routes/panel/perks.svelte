@@ -128,14 +128,28 @@
     <div class="igen card">
         <h1>Club iGen</h1>
 
-        Rejoignez le club iGen pour seulement X au lieu de 4,99€ par mois !
+        Bénéficiez d'une remise sur l'abonnement annuel au Club iGen de MacGeneration à 20€/an au lieu de 50€/an.<br/>
+        Cet abonnement vous permet de supprimer la publicité et le pistage sur les applications et le site, accéder à des
+        articles exclusifs et bénéficier d'un confort de lecture sur les plateformes (choix des polices, mode nuit).
 
-        <button class="do-it">Profiter</button>
+        <button class="do-it">Coming soon</button>
+    </div>
+
+    <div class="igen card">
+        <h1>Apple Developer</h1>
+
+        Obtenez un accès gratuit à la licence Apple Developer durant vos études.<br />Elle vous offre notamment la possibilité
+        de déployer vos applications sur l'App Store ou TestFlight, télécharger les dernières versions des environnements
+        d'Apple, et accéder au support et à la documentation Developer.
+
+        <a href="/panel/submit-dev" sveltekit:prefetch><button class="do-it">Profiter</button></a>
     </div>
 {/if}
 
 <style lang="scss">
     .header {
+        flex-shrink: 0;
+
         justify-content: center;
         align-items: center;
 
