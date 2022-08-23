@@ -1,12 +1,20 @@
 lockfileVersion: 5.3
 
+overrides:
+  minimist@<1.2.6: '>=1.2.6'
+  follow-redirects@<1.14.8: '>=1.14.8'
+  follow-redirects@<1.14.7: '>=1.14.7'
+  node-fetch@<2.6.7: '>=2.6.7'
+  svelte@<3.49.0: '>=3.49.0'
+
 specifiers:
   '@azure/msal-node': ^1.5.0
-  '@sveltejs/adapter-node': next
-  '@sveltejs/kit': next
+  '@sveltejs/adapter-node': '=1.0.0-next.76'
+  '@sveltejs/kit': '=1.0.0-next.344'
   apple-auth: ^1.0.7
   argon2: ^0.28.3
   cookie: ^0.4.1
+  cors: ^2.8.5
   google-auth-library: ^7.14.0
   googleapis: ^97.0.0
   jsonwebtoken: ^8.5.1
@@ -23,6 +31,7 @@ dependencies:
   apple-auth: 1.0.7
   argon2: 0.28.3
   cookie: 0.4.1
+  cors: 2.8.5
   google-auth-library: 7.14.0
   googleapis: 97.0.0
   jsonwebtoken: 8.5.1
@@ -31,8 +40,8 @@ dependencies:
   uuid: 8.3.2
 
 devDependencies:
-  '@sveltejs/adapter-node': 1.0.0-next.78
-  '@sveltejs/kit': 1.0.0-next.348_sass@1.46.0+svelte@3.45.0
+  '@sveltejs/adapter-node': 1.0.0-next.76
+  '@sveltejs/kit': 1.0.0-next.344_sass@1.46.0+svelte@3.45.0
   normalizecss: 3.0.0
   sass: 1.46.0
   svelte: 3.45.0
@@ -126,14 +135,14 @@ packages:
       picomatch: 2.3.1
     dev: true
 
-  /@sveltejs/adapter-node/1.0.0-next.78:
-    resolution: {integrity: sha512-TXB5Ii0z/7o1B05p/YLsS4t+JUHFHWBzFv1U16TKvM3HMbMUJIx+AhpM2WJfDX8HtAyfd1m9OawGoUB+1ed24A==}
+  /@sveltejs/adapter-node/1.0.0-next.76:
+    resolution: {integrity: sha512-SpzjYCLwCNMI7GscsaJMX5i9nOp+OoGzUCPSBs9gln9ffjO/ICLNpyea9Yfp0CkHRfufrMzMYa3wt2lqm4o9kA==}
     dependencies:
       tiny-glob: 0.2.9
     dev: true
 
-  /@sveltejs/kit/1.0.0-next.348_sass@1.46.0+svelte@3.45.0:
-    resolution: {integrity: sha512-K9dfgzIbotWmbcdCsQ6ROGs9R+bsGWwmSdN6l6km1QV5esQehqg1UYHGD9q0VJsg4rJg/zmKVBYo0oBquSHPZw==}
+  /@sveltejs/kit/1.0.0-next.344_sass@1.46.0+svelte@3.45.0:
+    resolution: {integrity: sha512-IKFyB/ErD1E6/Gl/AKA2EvOPmu6jdHDIoDYStL0PP12ZASOKTPNfSgusPHMNOTV+qyJKwo8JdOTWwLuFmZLq8A==}
     engines: {node: '>=16.7'}
     hasBin: true
     peerDependencies:
@@ -411,6 +420,14 @@ packages:
   /cookie/0.4.1:
     resolution: {integrity: sha512-ZwrFkGJxUR3EIoXtO+yVE69Eb7KlixbaeAWfBQB9vVsNn/o+Yw69gBWSSDK825hQNdN+wF8zELf3dFNl/kxkUA==}
     engines: {node: '>= 0.6'}
+    dev: false
+
+  /cors/2.8.5:
+    resolution: {integrity: sha512-KIHbLJqu73RGr/hnbrO9uBeixNGuvSQjul/jdFvS/KFSIH1hWVd1ng7zOHx+YrEfInLG7q4n6GHQ9cDtxv/P6g==}
+    engines: {node: '>= 0.10'}
+    dependencies:
+      object-assign: 4.1.1
+      vary: 1.1.2
     dev: false
 
   /debug/2.6.9:

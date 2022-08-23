@@ -14,6 +14,8 @@ COPY package.json package-lock.json svelte.config.js ./
 RUN apk update && apk add --no-cache npm
 RUN npm ci
 RUN npm run build
+RUN sed -i "s/crypto';/crypto'; import cors from 'cors';/g" build/index.js && \
+    sed -i 's/compression$1(/cors(), compression$1(/g' build/index.js
 
 RUN rm -rf node_modules
 RUN npm ci --omit=dev
