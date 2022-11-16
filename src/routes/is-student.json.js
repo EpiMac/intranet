@@ -18,13 +18,10 @@ export async function post(req)
         user = await getUserByMicrosoftEmail(email);
     }
 
-    const result = user && (
-        (user.microsoft_email && user.promo && user.promo >= new Date().getFullYear()) ||
-        user.email.endsWith('@' + whitelistDomain)
-    );
+    const result = (user && user.microsoft_email && user.promo && user.promo >= new Date().getFullYear()) || email.endsWith('@' + whitelistDomain);
     return {
         body: {
-            is_student: result || false,
+            is_student: result,
             ...(result ? { promo: user.promo } : {})
         }
     };
