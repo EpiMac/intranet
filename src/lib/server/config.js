@@ -63,7 +63,10 @@ function initConfigFolder()
     writeConfig('redis.json', {});
     writeConfig('apple_private_key.p8', 'INSERT YOUR PRIVATE KEY HERE');
     writeConfig('ionis_domains.json', ['example.com']);
-    writeConfig('igen.json', "EXAMPLE_API_KEY");
+    writeConfig('igen.json', {
+        apiKey: "EXAMPLE_API_KEY",
+        whitelistDomain: "example.com"
+    });
 }
 
 function writeConfig(name, content)
