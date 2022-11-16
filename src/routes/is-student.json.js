@@ -22,7 +22,7 @@ export async function post(req)
     return {
         body: {
             is_student: result,
-            ...(result ? { promo: user.promo } : {})
+            ...(result && user ? { promo: user.promo } : {})
         }
     };
 }
