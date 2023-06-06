@@ -132,7 +132,7 @@
         Cet abonnement vous permet de supprimer la publicité et le pistage sur les applications et le site, accéder à des
         articles exclusifs et bénéficier d'un confort de lecture sur les plateformes (choix des polices, mode nuit).
 
-        <button class="do-it">Coming soon</button>
+        <a href="https://clubigen.fr/student" target="_blank" rel="noopener noreferrer"><button class="do-it">Accéder</button></a>
     </div>
 
     <div class="igen card">
